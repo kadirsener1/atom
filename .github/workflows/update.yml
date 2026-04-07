@@ -27,9 +27,10 @@ jobs:
       - name: ChromeDriver kur
         uses: nanasess/setup-chromedriver@v2
 
-      - name: Kütüphaneler
+      - name: Kütüphaneleri yükle
         run: |
-          pip install selenium
+          python -m pip install --upgrade pip
+          pip install requests selenium
 
       - name: Script çalıştır
         run: python update.py
