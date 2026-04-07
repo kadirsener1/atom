@@ -1,5 +1,8 @@
 name: IPTV Update
 
+permissions:
+  contents: write
+
 on:
   schedule:
     - cron: "0 * * * *"
@@ -24,8 +27,7 @@ jobs:
           pip install requests
 
       - name: Script çalıştır
-        run: |
-          python update.py
+        run: python update.py
 
       - name: Değişiklikleri kaydet
         run: |
