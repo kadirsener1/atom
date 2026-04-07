@@ -6,10 +6,10 @@ import logging
 from datetime import datetime
 from urllib.parse import urljoin, urlparse
 from bs4 import BeautifulSoup
+import requests
 
-# ── Logging ÖNCE Tanımla ──────────────────────────────
+# ── Logging EN BAŞTA ──────────────────────────────────
 os.makedirs("logs", exist_ok=True)
-
 logging.basicConfig(
     level=logging.INFO,
     format="%(asctime)s [%(levelname)s] %(message)s",
@@ -24,15 +24,15 @@ logging.basicConfig(
 log = logging.getLogger(__name__)
 
 # ── Ayarlar ───────────────────────────────────────────
-TARGET_URL      = os.environ.get("TARGET_URL", "https://atomsportv494.top")
-OUTPUT_FILE     = "playlist.m3u"
-STATS_FILE      = "stats.json"
-CHROMEDRIVER    = os.environ.get("CHROMEDRIVER_PATH", "/usr/local/bin/chromedriver")
-CHROME_BIN      = os.environ.get("CHROME_BIN", "/usr/local/bin/google-chrome")
-PAGE_WAIT       = 15
-STREAM_WAIT     = 12
+TARGET_URL   = os.environ.get("TARGET_URL", "https://atomsportv494.top")
+OUTPUT_FILE  = "playlist.m3u"
+STATS_FILE   = "stats.json"
+CHROMEDRIVER = os.environ.get("CHROMEDRIVER_PATH", "/usr/local/bin/chromedriver")
+CHROME_BIN   = os.environ.get("CHROME_BIN", "/usr/local/bin/google-chrome")
+PAGE_WAIT    = 15
+STREAM_WAIT  = 15
 
-# ── Selenium Import ───────────────────────────────────
+# ── Selenium ──────────────────────────────────────────
 try:
     from seleniumwire import webdriver
     WIRE = True
@@ -40,7 +40,7 @@ try:
 except ImportError:
     from selenium import webdriver
     WIRE = False
-    log.info("⚠️ SeleniumWire yok, normal Selenium kullanılıyor")
+    log.warning("⚠️ SeleniumWire yok")
 
 from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.chrome.service import Service
@@ -49,13 +49,13 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 
 
-# ═════════════════════════════════════════════════════
-#                   DRIVER
-# ═════════════════════════════════════════════════════
+# ═══════════════════════════════════════════════════════
+#  DRIVER
+# ═══════════════════════════════════════════════════════
 def get_driver():
-    log.info("🔧 Driver başlatılıyor...")
-    log.info(f"   Chrome  : {CHROME_BIN}")
-    log.info(f"   Driver  : {CHROMEDRIVER}")
+    log.info(f"🔧 Driver başlatılıyor...")
+    log.info(f"   Chrome     : {CHROME_BIN}")
+    log.info(f"   ChromeDriver: {CHROMEDRIVER}")
 
     options = Options()
     options.add_argument("--headless=new")
@@ -69,6 +69,8 @@ def get_driver():
     options.add_argument("--disable-web-security")
     options.add_argument("--allow-running-insecure-content")
     options.add_argument("--ignore-certificate-errors")
+    options.add_argument("--disable-popup-blocking")
+    options.add_argument("--disable-notifications")
     options.add_argument(
         "--user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) "
         "AppleWebKit/537.36 (KHTML, like Gecko) "
@@ -77,77 +79,56 @@ def get_driver():
     options.add_experimental_option("excludeSwitches", ["enable-automation"])
     options.add_experimental_option("useAutomationExtension", False)
 
-    # Chrome binary
     if os.path.exists(CHROME_BIN):
         options.binary_location = CHROME_BIN
-        log.info(f"✅ Chrome binary bulundu")
-    else:
-        log.warning(f"⚠️ Chrome binary bulunamadı: {CHROME_BIN}")
 
-    # ChromeDriver path
-    driver_path = CHROMEDRIVER
-    if not os.path.exists(driver_path):
-        import shutil
-        found = shutil.which("chromedriver")
-        driver_path = found if found else "chromedriver"
-        log.warning(f"⚠️ ChromeDriver path değişti: {driver_path}")
+    service = Service(executable_path=CHROMEDRIVER)
 
-    service = Service(executable_path=driver_path)
-
-    try:
-        if WIRE:
-            sw_options = {
-                "verify_ssl": False,
-                "suppress_connection_errors": True,
-            }
-            driver = webdriver.Chrome(
-                service=service,
-                options=options,
-                seleniumwire_options=sw_options
-            )
-        else:
-            driver = webdriver.Chrome(
-                service=service,
-                options=options
-            )
-
-        driver.execute_script(
-            "Object.defineProperty(navigator, 'webdriver', {get: () => undefined})"
+    if WIRE:
+        sw_options = {
+            "verify_ssl": False,
+            "suppress_connection_errors": True,
+        }
+        driver = webdriver.Chrome(
+            service=service,
+            options=options,
+            seleniumwire_options=sw_options
         )
-        driver.set_page_load_timeout(30)
-        log.info("✅ Driver başarıyla başlatıldı")
-        return driver
+    else:
+        driver = webdriver.Chrome(service=service, options=options)
 
-    except Exception as e:
-        log.error(f"❌ Driver başlatma hatası: {e}")
-        raise
+    driver.execute_script(
+        "Object.defineProperty(navigator, 'webdriver', {get: () => undefined})"
+    )
+    driver.set_page_load_timeout(30)
+    log.info("✅ Driver başlatıldı")
+    return driver
 
 
-# ═════════════════════════════════════════════════════
-#                   M3U8 ÇIKARMA
-# ═════════════════════════════════════════════════════
+# ═══════════════════════════════════════════════════════
+#  M3U8 ÇIKARMA
+# ═══════════════════════════════════════════════════════
 M3U8_PATTERNS = [
-    r'https?://[^\s\'"<>\\]+\.m3u8[^\s\'"<>\\]*',
-    r'["\']([^"\']*\.m3u8[^"\']*)["\']',
-    r'src\s*:\s*["\']([^"\']+\.m3u8[^"\']*)["\']',
-    r'file\s*:\s*["\']([^"\']+\.m3u8[^"\']*)["\']',
-    r'url\s*:\s*["\']([^"\']+\.m3u8[^"\']*)["\']',
-    r'hls\s*:\s*["\']([^"\']+\.m3u8[^"\']*)["\']',
-    r'stream\s*:\s*["\']([^"\']+\.m3u8[^"\']*)["\']',
-    r'source\s*:\s*["\']([^"\']+\.m3u8[^"\']*)["\']',
-    r'playlist\s*:\s*["\']([^"\']+\.m3u8[^"\']*)["\']',
+    r'https?://[^\s\'"<>()\[\]{}\\]+\.m3u8(?:\?[^\s\'"<>()\[\]{}\\]*)?',
+    r'["\']([^"\']*\.m3u8(?:\?[^"\']*)?)["\']',
+    r'src\s*[=:]\s*["\']([^"\']+\.m3u8[^"\']*)["\']',
+    r'file\s*[=:]\s*["\']([^"\']+\.m3u8[^"\']*)["\']',
+    r'url\s*[=:]\s*["\']([^"\']+\.m3u8[^"\']*)["\']',
+    r'source\s*[=:]\s*["\']([^"\']+\.m3u8[^"\']*)["\']',
+    r'stream\s*[=:]\s*["\']([^"\']+\.m3u8[^"\']*)["\']',
+    r'hls\s*[=:]\s*["\']([^"\']+\.m3u8[^"\']*)["\']',
 ]
 
 def extract_m3u8(text, base_url=""):
-    """Metin içinden m3u8 URL'lerini çıkar"""
     found = set()
+    if not text:
+        return found
     for pattern in M3U8_PATTERNS:
         try:
             matches = re.findall(pattern, text, re.IGNORECASE)
             for match in matches:
-                url = match if isinstance(match, str) else match[0]
-                url = url.strip().strip("'\"").rstrip("\\")
-                if not url or len(url) < 10:
+                url = (match if isinstance(match, str) else match[0]).strip().strip("'\"")
+                if not url or len(url) < 15:
                     continue
                 if url.startswith("http"):
                     found.add(url)
@@ -155,20 +136,20 @@ def extract_m3u8(text, base_url=""):
                     found.add("https:" + url)
                 elif url.startswith("/") and base_url:
                     found.add(urljoin(base_url, url))
-        except Exception as e:
-            log.debug(f"Pattern hatası: {e}")
+        except Exception:
+            pass
     return found
 
 
 def decode_base64(text):
-    """Base64 encoded URL'leri çöz"""
     import base64
     found = set()
-    patterns = [
+    if not text:
+        return found
+    for pattern in [
         r'atob\(["\']([A-Za-z0-9+/=]+)["\']\)',
-        r'base64,([A-Za-z0-9+/=]{20,})',
-    ]
-    for pattern in patterns:
+        r'base64,([A-Za-z0-9+/=]{30,})',
+    ]:
         for match in re.findall(pattern, text):
             try:
                 decoded = base64.b64decode(match).decode("utf-8", errors="ignore")
@@ -178,11 +159,10 @@ def decode_base64(text):
     return found
 
 
-# ═════════════════════════════════════════════════════
-#                   NETWORK YAKALAMA
-# ═════════════════════════════════════════════════════
+# ═══════════════════════════════════════════════════════
+#  NETWORK YAKALAMA
+# ═══════════════════════════════════════════════════════
 def capture_network(driver, wait=STREAM_WAIT):
-    """Network isteklerinden m3u8 yakala"""
     if not WIRE:
         return set()
 
@@ -190,143 +170,153 @@ def capture_network(driver, wait=STREAM_WAIT):
     time.sleep(wait)
 
     found = set()
-    keywords = [".m3u8", ".ts", "stream", "hls", "live", "playlist", "chunk"]
-
-    log.info(f"  📡 Toplam istek: {len(driver.requests)}")
+    total = len(driver.requests)
+    log.info(f"  📡 Toplam istek: {total}")
 
     for req in driver.requests:
         url = req.url
+
         if ".m3u8" in url:
             found.add(url)
             log.info(f"  🎯 [Network] {url}")
             continue
 
-        # Response body'den ara
+        # Response body tara
         try:
             if req.response and req.response.body:
                 body = req.response.body.decode("utf-8", errors="ignore")
                 if ".m3u8" in body:
                     urls = extract_m3u8(body)
-                    found.update(urls)
                     for u in urls:
-                        log.info(f"  🎯 [Response] {u}")
+                        found.add(u)
+                        log.info(f"  🎯 [Response Body] {u}")
         except Exception:
             pass
 
     return found
 
 
-# ═════════════════════════════════════════════════════
-#                   JAVASCRIPT TARAMA
-# ═════════════════════════════════════════════════════
-JS_EXTRACT = """
+# ═══════════════════════════════════════════════════════
+#  JAVASCRIPT TARAMA
+# ═══════════════════════════════════════════════════════
+JS_SCRIPT = """
 (function() {
     var found = [];
 
-    // Video elementleri
-    document.querySelectorAll('video, source').forEach(function(el) {
-        if (el.src && el.src.includes('.m3u8')) found.push(el.src);
-        if (el.currentSrc && el.currentSrc.includes('.m3u8')) found.push(el.currentSrc);
-    });
+    // 1. Video elementleri
+    try {
+        document.querySelectorAll('video,source').forEach(function(el) {
+            if (el.src && el.src.includes('.m3u8')) found.push(el.src);
+            if (el.currentSrc && el.currentSrc.includes('.m3u8')) found.push(el.currentSrc);
+        });
+    } catch(e) {}
 
-    // innerHTML tara
-    var html = document.documentElement.innerHTML;
-    var matches = html.match(/https?:\\/\\/[^\\s'"<>\\\\]+\\.m3u8[^\\s'"<>\\\\]*/gi);
-    if (matches) found = found.concat(matches);
+    // 2. HTML içinde ara
+    try {
+        var html = document.documentElement.innerHTML;
+        var m = html.match(/https?:\\/\\/[^\\s'"<>()\\[\\]{}\\\\]+\\.m3u8(?:\\?[^\\s'"<>()\\[\\]{}\\\\]*)?/gi);
+        if (m) found = found.concat(m);
+    } catch(e) {}
 
-    // JWPlayer
+    // 3. JWPlayer
     try {
         if (typeof jwplayer !== 'undefined') {
             var jw = jwplayer();
             if (jw.getPlaylist) {
                 jw.getPlaylist().forEach(function(item) {
                     if (item.file) found.push(item.file);
-                    if (item.sources) item.sources.forEach(function(s) {
-                        if (s.file) found.push(s.file);
-                    });
+                    if (item.sources) {
+                        item.sources.forEach(function(s) {
+                            if (s.file) found.push(s.file);
+                        });
+                    }
                 });
             }
+            try {
+                var curr = jw.getPlaylistItem();
+                if (curr && curr.file) found.push(curr.file);
+            } catch(e2) {}
         }
     } catch(e) {}
 
-    // Video.js
+    // 4. Video.js
     try {
         if (typeof videojs !== 'undefined') {
             videojs.getAllPlayers().forEach(function(p) {
-                var src = p.src();
-                if (src && src.includes('.m3u8')) found.push(src);
+                var s = p.src();
+                if (s && s.includes('.m3u8')) found.push(s);
             });
         }
     } catch(e) {}
 
-    // Hls.js
+    // 5. Hls.js instance
     try {
-        for (var key in window) {
+        for (var k in window) {
             try {
-                var obj = window[key];
-                if (obj && typeof obj === 'object') {
-                    if (obj.url && obj.url.includes('.m3u8')) found.push(obj.url);
-                    if (obj.src && obj.src.includes('.m3u8')) found.push(obj.src);
-                    if (obj.streamUrl && obj.streamUrl.includes('.m3u8')) found.push(obj.streamUrl);
+                var v = window[k];
+                if (v && typeof v === 'object') {
+                    if (v.url && typeof v.url === 'string' && v.url.includes('.m3u8'))
+                        found.push(v.url);
+                    if (v.src && typeof v.src === 'string' && v.src.includes('.m3u8'))
+                        found.push(v.src);
+                    if (v.streamUrl && typeof v.streamUrl === 'string' && v.streamUrl.includes('.m3u8'))
+                        found.push(v.streamUrl);
+                    if (v.hlsUrl && typeof v.hlsUrl === 'string' && v.hlsUrl.includes('.m3u8'))
+                        found.push(v.hlsUrl);
                 }
             } catch(e) {}
         }
     } catch(e) {}
 
-    // Window değişkenleri
+    // 6. Config objeleri
     try {
-        var keys = Object.keys(window);
-        keys.forEach(function(key) {
+        ['config','playerConfig','streamConfig','videoConfig',
+         'hlsConfig','options','settings','setup','params'].forEach(function(name) {
             try {
-                var val = JSON.stringify(window[key]);
+                var val = JSON.stringify(window[name] || {});
                 if (val && val.includes('.m3u8')) {
-                    var m = val.match(/https?:\\/\\/[^\\s'"<>\\\\]+\\.m3u8[^\\s'"<>\\\\]*/gi);
-                    if (m) found = found.concat(m);
+                    var m2 = val.match(/https?:\\/\\/[^\\s'"<>\\\\]+\\.m3u8[^\\s'"<>\\\\]*/gi);
+                    if (m2) found = found.concat(m2);
                 }
             } catch(e) {}
         });
     } catch(e) {}
 
-    // Config objeleri
+    // 7. localStorage
     try {
-        ['config', 'playerConfig', 'streamConfig', 'videoConfig',
-         'hlsConfig', 'options', 'settings', 'player_vars'].forEach(function(name) {
-            try {
-                var val = JSON.stringify(window[name]);
-                if (val && val.includes('.m3u8')) {
-                    var m = val.match(/https?:\\/\\/[^\\s'"<>\\\\]+\\.m3u8[^\\s'"<>\\\\]*/gi);
-                    if (m) found = found.concat(m);
-                }
-            } catch(e) {}
-        });
+        for (var i = 0; i < localStorage.length; i++) {
+            var lv = localStorage.getItem(localStorage.key(i)) || '';
+            if (lv.includes('.m3u8')) {
+                var m3 = lv.match(/https?:\\/\\/[^\\s'"]+\\.m3u8[^\\s'"]*/gi);
+                if (m3) found = found.concat(m3);
+            }
+        }
     } catch(e) {}
 
     return [...new Set(found.filter(function(u) {
-        return u && u.includes('.m3u8');
+        return u && typeof u === 'string' && u.includes('.m3u8') && u.startsWith('http');
     }))];
 })();
 """
 
 def scan_js(driver):
-    """JavaScript'ten m3u8 çıkar"""
     found = set()
     try:
-        results = driver.execute_script(JS_EXTRACT)
+        results = driver.execute_script(JS_SCRIPT)
         if results:
             for url in results:
                 if url and ".m3u8" in url:
                     found.add(url)
                     log.info(f"  🎯 [JS] {url}")
     except Exception as e:
-        log.debug(f"  JS tarama hatası: {e}")
+        log.debug(f"JS hatası: {e}")
     return found
 
 
-# ═════════════════════════════════════════════════════
-#                   IFRAME TARAMA
-# ═════════════════════════════════════════════════════
+# ═══════════════════════════════════════════════════════
+#  IFRAME TARAMA
+# ═══════════════════════════════════════════════════════
 def scan_iframes(driver, base_url, depth=2):
-    """iframe'leri tara"""
     if depth <= 0:
         return set()
 
@@ -334,11 +324,11 @@ def scan_iframes(driver, base_url, depth=2):
 
     try:
         iframes = driver.find_elements(By.TAG_NAME, "iframe")
-        log.info(f"  📦 {len(iframes)} iframe bulundu")
+        log.info(f"  📦 {len(iframes)} iframe")
 
         for i, iframe in enumerate(iframes):
             try:
-                src = iframe.get_attribute("src") or ""
+                src = iframe.get_attribute("src") or "blob/srcdoc"
                 log.info(f"  [iframe {i+1}] {src}")
 
                 driver.switch_to.frame(iframe)
@@ -348,41 +338,41 @@ def scan_iframes(driver, base_url, depth=2):
                 found.update(scan_js(driver))
 
                 # Kaynak tara
-                source = driver.page_source
-                found.update(extract_m3u8(source, base_url))
-                found.update(decode_base64(source))
+                src_html = driver.page_source
+                found.update(extract_m3u8(src_html, base_url))
+                found.update(decode_base64(src_html))
 
-                # Nested iframe
+                # Nested
                 if depth > 1:
                     found.update(scan_iframes(driver, base_url, depth - 1))
 
                 driver.switch_to.default_content()
 
             except Exception as e:
-                log.debug(f"  iframe[{i}] hatası: {e}")
+                log.debug(f"iframe[{i}] hatası: {e}")
                 try:
                     driver.switch_to.default_content()
                 except Exception:
                     pass
 
     except Exception as e:
-        log.debug(f"  iframe tarama hatası: {e}")
+        log.debug(f"iframe tarama hatası: {e}")
 
     return found
 
 
-# ═════════════════════════════════════════════════════
-#                   PLAY BUTONU
-# ═════════════════════════════════════════════════════
+# ═══════════════════════════════════════════════════════
+#  PLAY BUTONU
+# ═══════════════════════════════════════════════════════
 def click_play(driver):
-    """Play butonuna tıkla"""
     selectors = [
         ".play-button", ".btn-play", "#play-button",
         ".jw-icon-playback", ".vjs-play-button",
         ".fp-play", ".plyr__control--overlaid",
         "[class*='play-btn']", "[class*='play_btn']",
-        "[aria-label='Play']", "[title='Play']",
-        "button.play", ".overlay-play",
+        "[class*='play-icon']", "[aria-label='Play']",
+        "[title='Play']", "button.play", ".overlay-play",
+        ".play-overlay", "#player .play",
     ]
 
     for sel in selectors:
@@ -397,7 +387,6 @@ def click_play(driver):
         except Exception:
             pass
 
-    # JS ile oynat
     try:
         driver.execute_script("""
             document.querySelectorAll('video').forEach(function(v) {
@@ -405,7 +394,7 @@ def click_play(driver):
                 v.play().catch(function(e) {});
             });
         """)
-        log.info("  ▶️ Video JS ile başlatıldı")
+        log.info("  ▶️ JS ile video oynatıldı")
         time.sleep(3)
         return True
     except Exception:
@@ -414,11 +403,44 @@ def click_play(driver):
     return False
 
 
-# ═════════════════════════════════════════════════════
-#                   KANAL LİNKLERİ
-# ═════════════════════════════════════════════════════
+# ═══════════════════════════════════════════════════════
+#  REQUESTS İLE TARAMA (Selenium olmadan)
+# ═══════════════════════════════════════════════════════
+def scrape_with_requests(url):
+    """Selenium bulamazsa requests ile dene"""
+    found = set()
+    headers = {
+        "User-Agent": (
+            "Mozilla/5.0 (Windows NT 10.0; Win64; x64) "
+            "AppleWebKit/537.36 (KHTML, like Gecko) "
+            "Chrome/120.0.0.0 Safari/537.36"
+        ),
+        "Referer": TARGET_URL,
+    }
+    try:
+        resp = requests.get(url, headers=headers, timeout=15)
+        found.update(extract_m3u8(resp.text, url))
+        found.update(decode_base64(resp.text))
+
+        # Script src'lerini de çek
+        soup = BeautifulSoup(resp.text, "html.parser")
+        for script in soup.find_all("script", src=True):
+            try:
+                s_url = urljoin(url, script["src"])
+                s_resp = requests.get(s_url, headers=headers, timeout=10)
+                found.update(extract_m3u8(s_resp.text, url))
+            except Exception:
+                pass
+
+    except Exception as e:
+        log.debug(f"requests hatası: {e}")
+    return found
+
+
+# ═══════════════════════════════════════════════════════
+#  KANAL LİNKLERİ
+# ═══════════════════════════════════════════════════════
 def get_channel_links(driver):
-    """Ana sayfadan kanal linklerini topla"""
     log.info(f"🌐 Ana sayfa: {TARGET_URL}")
 
     try:
@@ -427,11 +449,10 @@ def get_channel_links(driver):
             EC.presence_of_element_located((By.TAG_NAME, "body"))
         )
     except Exception as e:
-        log.warning(f"Sayfa yüklenme hatası: {e}")
+        log.warning(f"Sayfa yükleme: {e}")
 
     time.sleep(5)
 
-    # Lazy load için scroll
     try:
         driver.execute_script("window.scrollTo(0, document.body.scrollHeight)")
         time.sleep(2)
@@ -442,6 +463,7 @@ def get_channel_links(driver):
 
     soup  = BeautifulSoup(driver.page_source, "html.parser")
     links = set()
+    skip  = [".jpg",".png",".gif",".css",".js",".ico",".xml",".txt",".pdf"]
 
     for a in soup.find_all("a", href=True):
         href     = a["href"].strip()
@@ -450,21 +472,19 @@ def get_channel_links(driver):
         target   = urlparse(TARGET_URL)
 
         if parsed.netloc == target.netloc:
-            skip_ext = [".jpg",".png",".gif",".css",".js",".ico",".xml",".txt"]
-            if not any(full_url.lower().endswith(x) for x in skip_ext):
-                if full_url != TARGET_URL:
+            if not any(full_url.lower().endswith(x) for x in skip):
+                if full_url != TARGET_URL and "#" not in full_url:
                     links.add(full_url)
 
     links.add(TARGET_URL)
-    log.info(f"📋 {len(links)} kanal linki bulundu")
+    log.info(f"📋 {len(links)} link bulundu")
     return list(links)
 
 
-# ═════════════════════════════════════════════════════
-#                   TEK KANAL TARA
-# ═════════════════════════════════════════════════════
+# ═══════════════════════════════════════════════════════
+#  TEK KANAL TARA
+# ═══════════════════════════════════════════════════════
 def scrape_channel(driver, url):
-    """Bir kanalı tara"""
     log.info(f"\n{'─'*50}")
     log.info(f"🔍 {url}")
     log.info(f"{'─'*50}")
@@ -472,50 +492,54 @@ def scrape_channel(driver, url):
     found = set()
 
     try:
-        # Önceki istekleri temizle
         if WIRE:
             try:
                 del driver.requests
             except Exception:
                 pass
 
-        # Sayfayı aç
         driver.get(url)
+
         try:
             WebDriverWait(driver, PAGE_WAIT).until(
                 EC.presence_of_element_located((By.TAG_NAME, "body"))
             )
         except Exception:
             pass
+
         time.sleep(3)
 
         # Play
         click_play(driver)
 
-        # 1. Network
+        # 1. Network (wire)
         if WIRE:
             found.update(capture_network(driver, STREAM_WAIT))
 
-        # 2. JavaScript
+        # 2. JS
         found.update(scan_js(driver))
 
         # 3. iframe
         found.update(scan_iframes(driver, url))
 
         # 4. Sayfa kaynağı
-        source = driver.page_source
-        found.update(extract_m3u8(source, url))
-        found.update(decode_base64(source))
+        page = driver.page_source
+        found.update(extract_m3u8(page, url))
+        found.update(decode_base64(page))
 
         # 5. Script tagları
-        soup = BeautifulSoup(source, "html.parser")
-        for script in soup.find_all("script"):
-            content = script.string or ""
-            if content:
-                found.update(extract_m3u8(content, url))
-                found.update(decode_base64(content))
+        soup = BeautifulSoup(page, "html.parser")
+        for tag in soup.find_all("script"):
+            c = tag.string or ""
+            if c:
+                found.update(extract_m3u8(c, url))
+                found.update(decode_base64(c))
 
-        # Kanal adı
+        # 6. Requests fallback
+        if not found:
+            log.info("  🔄 Requests ile deneniyor...")
+            found.update(scrape_with_requests(url))
+
         try:
             name = driver.title.strip()[:60] or "Kanal"
         except Exception:
@@ -524,7 +548,7 @@ def scrape_channel(driver, url):
         if found:
             log.info(f"  ✅ {len(found)} M3U8 bulundu")
         else:
-            log.info(f"  ❌ M3U8 bulunamadı")
+            log.info(f"  ❌ Bulunamadı")
 
         return name, list(found)
 
@@ -533,9 +557,9 @@ def scrape_channel(driver, url):
         return "Hata", []
 
 
-# ═════════════════════════════════════════════════════
-#                   M3U DOSYASI
-# ═════════════════════════════════════════════════════
+# ═══════════════════════════════════════════════════════
+#  M3U OLUŞTUR
+# ═══════════════════════════════════════════════════════
 def create_m3u(channels):
     now   = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
     lines = [
@@ -552,8 +576,9 @@ def create_m3u(channels):
         if not url:
             continue
 
-        extinf  = f'#EXTINF:-1 tvg-name="{name}"'
-        extinf += f' tvg-logo="{logo}"' if logo else ""
+        extinf = f'#EXTINF:-1 tvg-name="{name}"'
+        if logo:
+            extinf += f' tvg-logo="{logo}"'
         extinf += f' group-title="{group}",{name}\n'
 
         lines.append(extinf)
@@ -562,12 +587,12 @@ def create_m3u(channels):
     return "".join(lines)
 
 
-# ═════════════════════════════════════════════════════
-#                   MAIN
-# ═════════════════════════════════════════════════════
+# ═══════════════════════════════════════════════════════
+#  MAIN
+# ═══════════════════════════════════════════════════════
 def main():
     log.info("=" * 55)
-    log.info("   M3U8 Scraper Baslatiliyor")
+    log.info("   M3U8 Scraper")
     log.info(f"   Hedef : {TARGET_URL}")
     log.info(f"   Wire  : {WIRE}")
     log.info("=" * 55)
@@ -575,15 +600,13 @@ def main():
     start    = time.time()
     driver   = None
     channels = []
+    seen     = set()
 
     try:
         driver = get_driver()
+        links  = get_channel_links(driver)
 
-        # Kanal linklerini al
-        links = get_channel_links(driver)
         log.info(f"\n📺 {len(links)} sayfa taranacak\n")
-
-        seen_urls = set()
 
         for i, link in enumerate(links, 1):
             log.info(f"\n[{i}/{len(links)}]")
@@ -591,11 +614,11 @@ def main():
             name, m3u8_list = scrape_channel(driver, link)
 
             for j, m3u8 in enumerate(m3u8_list, 1):
-                if m3u8 in seen_urls:
+                if m3u8 in seen:
                     continue
-                seen_urls.add(m3u8)
+                seen.add(m3u8)
 
-                ch_name = f"{name}" if len(m3u8_list) == 1 else f"{name} {j}"
+                ch_name = name if len(m3u8_list) == 1 else f"{name} {j}"
                 channels.append({
                     "name" : ch_name,
                     "url"  : m3u8,
@@ -616,21 +639,20 @@ def main():
             except Exception:
                 pass
 
-    # ── Sonuçlar ──────────────────────────────────────
+    # Sonuç
     elapsed = round(time.time() - start, 1)
     log.info(f"\n{'='*55}")
     log.info(f"🏁 Tamamlandı!")
-    log.info(f"📺 Kanal : {len(channels)}")
-    log.info(f"⏱️  Süre  : {elapsed}s")
+    log.info(f"📺 Kanal  : {len(channels)}")
+    log.info(f"⏱️  Süre   : {elapsed}s")
     log.info(f"{'='*55}")
 
-    # M3U kaydet
+    # Kaydet
     content = create_m3u(channels)
     with open(OUTPUT_FILE, "w", encoding="utf-8") as f:
         f.write(content)
     log.info(f"✅ {OUTPUT_FILE} kaydedildi")
 
-    # Stats kaydet
     stats = {
         "last_update"    : datetime.now().isoformat(),
         "total_channels" : len(channels),
@@ -644,6 +666,7 @@ def main():
 
     if not channels:
         log.warning("⚠️ Hiç M3U8 bulunamadı!")
+        log.info("💡 logs/ klasörünü kontrol et")
 
 
 if __name__ == "__main__":
