@@ -1,16 +1,10 @@
 import re
 import time
-import os
 import requests
-from urllib.parse import urljoin
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
 
 DOMAIN = "https://atomsportv494.top/"
-
-HEADERS = {
-    "User-Agent": "Mozilla/5.0"
-}
 
 # 🔧 Selenium
 def create_driver():
@@ -21,81 +15,53 @@ def create_driver():
     options.set_capability("goog:loggingPrefs", {"performance": "ALL"})
     return webdriver.Chrome(options=options)
 
-# 📺 Kanal listesi
+# 📺 kanal linklerini çek
 def get_channels():
-    r = requests.get(DOMAIN, headers=HEADERS, timeout=10)
-    ids = re.findall(r'matches\?id=([a-zA-Z0-9\-]+)', r.text)
-    return list(set(ids))
+    r = requests.get(DOMAIN, timeout=10)
+    return list(set(re.findall(r'matches\?id=([a-zA-Z0-9\-]+)', r.text)))
 
-# 📡 m3u8 yakala + LOG
+# 📡 sadece m3u8 yakala
 def get_m3u8(driver, cid):
-    try:
-        url = urljoin(DOMAIN, f"matches?id={cid}")
-        print(f"\n🔍 Kanal: {cid}")
-        print(f"➡️ URL: {url}")
+    url = f"{DOMAIN}matches?id={cid}"
 
-        driver.get(url)
-        time.sleep(6)
+    driver.get(url)
+    time.sleep(5)
 
-        logs = driver.get_log("performance")
+    logs = driver.get_log("performance")
 
-        for log in logs:
-            msg = log["message"]
-            if ".m3u8" in msg:
-                start = msg.find("http")
-                end = msg.find(".m3u8") + 5
-                link = msg[start:end]
-
-                print(f"🎯 M3U8 BULUNDU:")
-                print(f"{cid} => {link}")
-
-                return link
-
-        print("❌ M3U8 bulunamadı")
-
-    except Exception as e:
-        print(f"⚠️ hata: {cid} - {e}")
+    for log in logs:
+        msg = log["message"]
+        if ".m3u8" in msg:
+            start = msg.find("http")
+            end = msg.find(".m3u8") + 5
+            return msg[start:end]
 
     return None
 
-# ✍️ M3U YAZ (SIFIRDAN YAZDIRMA - GARANTİ)
-def write_m3u(filename, links, referer):
-    print("\n📄 M3U dosyası yazılıyor...")
-
-    lines = ["#EXTM3U"]
-
-    for cid, url in links.items():
-        lines.append(f'#EXTINF:-1 tvg-id="{cid}",{cid}')
-        lines.append(f"#EXTVLCOPT:http-referrer={referer}")
-        lines.append(url)
-
+# 📄 M3U yaz
+def write_m3u(filename, links):
     with open(filename, "w", encoding="utf-8") as f:
-        f.write("\n".join(lines))
+        f.write("#EXTM3U\n\n")
 
-    print("✅ M3U dosyası tamamen güncellendi")
+        for i, link in enumerate(links, start=1):
+            f.write(f"#EXTINF:-1, Kanal {i}\n")
+            f.write(f"{link}\n\n")
 
-# 🚀 ANA AKIŞ
-channels = get_channels()
-print(f"\n📺 Toplam kanal: {len(channels)}")
-
+# 🚀 ANA
 driver = create_driver()
+channels = get_channels()
 
-found_links = {}
+found_links = []
 
 for cid in channels:
     link = get_m3u8(driver, cid)
     if link:
-        found_links[cid] = link
+        print(link)  # 🔥 SADECE LINK LOGDA
+        found_links.append(link)
 
 driver.quit()
 
-# 🔥 LOGDA TOPLU GÖSTER
-print("\n📡 BULUNAN TÜM LİNKLER:")
-for k, v in found_links.items():
-    print(f"{k} => {v}")
-
-# 📄 M3U YAZ
 if found_links:
-    write_m3u("cafe.m3u", found_links, DOMAIN)
+    write_m3u("cafe.m3u", found_links)
 else:
-    print("❌ Hiç link bulunamadı")
+    print("link yok")
