@@ -62,14 +62,11 @@ jobs:
             --no-install-recommends
           echo "✅ Sistem paketleri tamam"
 
-      # ── Chrome + ChromeDriver (Aynı Anda) ───────────
       - name: 🌐 Chrome & ChromeDriver Kur
         run: |
-          # Chrome for Testing - hem chrome hem driver aynı versiyonda
           LATEST=$(curl -s \
             "https://googlechromelabs.github.io/chrome-for-testing/last-known-good-versions-with-downloads.json")
 
-          # Chrome URL
           CHROME_URL=$(echo "$LATEST" | python3 -c "
           import sys, json
           data = json.load(sys.stdin)
@@ -79,7 +76,6 @@ jobs:
                   break
           ")
 
-          # ChromeDriver URL
           DRIVER_URL=$(echo "$LATEST" | python3 -c "
           import sys, json
           data = json.load(sys.stdin)
@@ -89,17 +85,7 @@ jobs:
                   break
           ")
 
-          CHROME_VER=$(echo "$LATEST" | python3 -c "
-          import sys, json
-          data = json.load(sys.stdin)
-          print(data['channels']['Stable']['version'])
-          ")
-
-          echo "📌 Versiyon: $CHROME_VER"
-          echo "📥 Chrome URL: $CHROME_URL"
-          echo "📥 Driver URL: $DRIVER_URL"
-
-          # Chrome indir & kur
+          echo "📥 Chrome indiriliyor..."
           wget -q "$CHROME_URL" -O chrome-linux64.zip
           unzip -q chrome-linux64.zip -d chrome_tmp
           sudo mv chrome_tmp/chrome-linux64 /opt/chrome
@@ -107,25 +93,16 @@ jobs:
           sudo chmod +x /opt/chrome/chrome
           rm -rf chrome_tmp chrome-linux64.zip
 
-          # ChromeDriver indir & kur
+          echo "📥 ChromeDriver indiriliyor..."
           wget -q "$DRIVER_URL" -O chromedriver-linux64.zip
           unzip -q chromedriver-linux64.zip -d driver_tmp
-
-          # Sadece chromedriver binary'sini al
           DRIVER_BIN=$(find driver_tmp -name "chromedriver" -type f | head -1)
-          echo "🔍 Driver binary: $DRIVER_BIN"
-
           sudo cp "$DRIVER_BIN" /usr/local/bin/chromedriver
           sudo chmod +x /usr/local/bin/chromedriver
           rm -rf driver_tmp chromedriver-linux64.zip
 
-          # Kontrol
           echo "✅ Chrome: $(google-chrome --version)"
           echo "✅ Driver: $(chromedriver --version)"
-
-          # PATH'e ekle
-          echo "CHROME_BIN=/usr/local/bin/google-chrome" >> $GITHUB_ENV
-          echo "CHROMEDRIVER_PATH=/usr/local/bin/chromedriver" >> $GITHUB_ENV
 
       - name: 📦 Python Paketleri
         run: |
@@ -148,7 +125,6 @@ jobs:
           echo "DISPLAY=:99" >> $GITHUB_ENV
           echo "✅ Display başlatıldı"
 
-      # ── Chrome Test ──────────────────────────────────
       - name: 🧪 Chrome Test
         env:
           DISPLAY: ':99'
@@ -157,7 +133,6 @@ jobs:
           from selenium import webdriver
           from selenium.webdriver.chrome.options import Options
           from selenium.webdriver.chrome.service import Service
-          import os
 
           opts = Options()
           opts.add_argument("--headless=new")
@@ -166,16 +141,13 @@ jobs:
           opts.add_argument("--disable-gpu")
           opts.binary_location = "/usr/local/bin/google-chrome"
 
-          # webdriver-manager KULLANMA - direkt path ver
           service = Service(executable_path="/usr/local/bin/chromedriver")
-
-          driver = webdriver.Chrome(service=service, options=opts)
+          driver  = webdriver.Chrome(service=service, options=opts)
           driver.get("https://www.google.com")
-          print(f"✅ Chrome test başarılı: {driver.title}")
+          print(f"✅ Chrome test OK: {driver.title}")
           driver.quit()
           EOF
 
-      # ── Scraper Çalıştır ─────────────────────────────
       - name: 🔍 Scraper Çalıştır
         env:
           TARGET_URL: ${{ secrets.TARGET_URL }}
@@ -185,21 +157,34 @@ jobs:
           PYTHONUNBUFFERED: '1'
         run: |
           python scraper.py
-        timeout-minutes: 30
 
+      # ── DÜZELTME: GITHUB_ENV formatı ────────────────
       - name: 📊 Sonuç Kontrol
         run: |
           if [ -f "playlist.m3u" ]; then
-            COUNT=$(grep -c "#EXTINF" playlist.m3u 2>/dev/null || echo "0")
-            echo "CHANNEL_COUNT=$COUNT" >> $GITHUB_ENV
-            echo "✅ Kanal: $COUNT"
+            # grep çıktısını güvenli al
+            COUNT=$(grep -c "#EXTINF" playlist.m3u || true)
+            
+            # Boş veya sayı değilse 0 yap
+            if ! [[ "$COUNT" =~ ^[0-9]+$ ]]; then
+              COUNT=0
+            fi
+
+            echo "📺 Kanal sayısı: $COUNT"
+            
+            # GITHUB_ENV'e doğru format ile yaz
+            echo "CHANNEL_COUNT=${COUNT}" >> $GITHUB_ENV
+
+            echo "--- playlist.m3u ---"
             cat playlist.m3u
+            echo "--------------------"
           else
-            echo "❌ playlist.m3u yok!"
+            echo "❌ playlist.m3u bulunamadı!"
+            echo "CHANNEL_COUNT=0" >> $GITHUB_ENV
             exit 1
           fi
 
-      - name: 📦 Artifact
+      - name: 📦 Artifact Yükle
         if: always()
         uses: actions/upload-artifact@v4
         with:
@@ -218,11 +203,16 @@ jobs:
 
       - name: 💾 Commit & Push
         run: |
-          git add playlist.m3u stats.json logs/ 2>/dev/null || true
+          git add playlist.m3u  2>/dev/null || true
+          git add stats.json    2>/dev/null || true
+          git add logs/         2>/dev/null || true
+
           if git diff --staged --quiet; then
             echo "ℹ️ Değişiklik yok"
           else
-            git commit -m "🔄 ${{ env.CHANNEL_COUNT }} kanal | $(date '+%Y-%m-%d %H:%M UTC')"
+            COUNT="${{ env.CHANNEL_COUNT }}"
+            DATE="$(date '+%Y-%m-%d %H:%M UTC')"
+            git commit -m "🔄 ${COUNT} kanal | ${DATE}"
             git push
             echo "✅ Push tamam"
           fi
@@ -230,16 +220,19 @@ jobs:
       - name: 📋 Özet
         if: always()
         run: |
+          COUNT="${{ env.CHANNEL_COUNT }}"
           RAW="https://raw.githubusercontent.com/${{ github.repository }}/main/playlist.m3u"
-          cat >> $GITHUB_STEP_SUMMARY << EOF
-          ## 📺 Playlist Raporu
-          | Alan | Değer |
-          |------|-------|
-          | 📅 Tarih | $(date '+%Y-%m-%d %H:%M UTC') |
-          | 📺 Kanal | ${{ env.CHANNEL_COUNT }} |
-          | ✅ Durum | ${{ job.status }} |
-          ### 📥 URL
-          \`\`\`
-          ${RAW}
-          \`\`\`
-          EOF
+          
+          {
+            echo "## 📺 Playlist Raporu"
+            echo "| Alan | Değer |"
+            echo "|------|-------|"
+            echo "| 📅 Tarih | $(date '+%Y-%m-%d %H:%M UTC') |"
+            echo "| 📺 Kanal | ${COUNT} |"
+            echo "| ✅ Durum | ${{ job.status }} |"
+            echo ""
+            echo "### 📥 URL"
+            echo '```'
+            echo "${RAW}"
+            echo '```'
+          } >> $GITHUB_STEP_SUMMARY
