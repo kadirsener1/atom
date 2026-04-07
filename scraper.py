@@ -1,42 +1,11 @@
 import os
-import re
-import json
-import time
-import logging
-from datetime import datetime
-from urllib.parse import urljoin, urlparse
-
-try:
-    from seleniumwire import webdriver
-    WIRE = True
-except ImportError:
-    from selenium import webdriver
-    WIRE = False
-
+from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.chrome.service import Service
-from selenium.webdriver.common.by import By
-from selenium.webdriver.support.ui import WebDriverWait
-from selenium.webdriver.support import expected_conditions as EC
-from bs4 import BeautifulSoup
-
-# ── Logging ───────────────────────────────────────────
-logging.basicConfig(
-    level=logging.DEBUG,
-    format="%(asctime)s [%(levelname)s] %(message)s",
-    handlers=[
-        logging.FileHandler("debug.log", encoding="utf-8"),
-        logging.StreamHandler()
-    ]
-)
-log = logging.getLogger(__name__)
-
-TARGET_URL = "https://atomsportv494.top"
 
 def get_driver():
     options = Options()
-    # Debug için headless KAPALII - tarayıcıyı görmek için
-    # options.add_argument("--headless=new")
+    options.add_argument("--headless=new")
     options.add_argument("--no-sandbox")
     options.add_argument("--disable-dev-shm-usage")
     options.add_argument("--disable-gpu")
@@ -54,24 +23,46 @@ def get_driver():
     )
     options.add_experimental_option("useAutomationExtension", False)
 
-    # Seleniumwire varsa kullan
-    if WIRE:
+    # Chrome binary path
+    chrome_bin = os.environ.get(
+        "CHROME_BIN", "/usr/local/bin/google-chrome"
+    )
+    if os.path.exists(chrome_bin):
+        options.binary_location = chrome_bin
+
+    # ChromeDriver path - webdriver-manager KULLANMA
+    driver_path = os.environ.get(
+        "CHROMEDRIVER_PATH", "/usr/local/bin/chromedriver"
+    )
+
+    # Driver path yoksa bul
+    if not os.path.exists(driver_path):
+        import shutil
+        driver_path = shutil.which("chromedriver") or "chromedriver"
+
+    print(f"🔧 ChromeDriver: {driver_path}")
+    print(f"🌐 Chrome: {chrome_bin}")
+
+    # SeleniumWire varsa kullan
+    try:
+        from seleniumwire import webdriver as wire_driver
+
         sw_options = {
             "verify_ssl": False,
             "suppress_connection_errors": True,
-            "enable_har": True,
         }
-        from webdriver_manager.chrome import ChromeDriverManager
-        service = Service(ChromeDriverManager().install())
-        driver = webdriver.Chrome(
+        service = Service(executable_path=driver_path)
+        driver  = wire_driver.Chrome(
             service=service,
             options=options,
             seleniumwire_options=sw_options
         )
-    else:
-        from webdriver_manager.chrome import ChromeDriverManager
-        service = Service(ChromeDriverManager().install())
-        driver = webdriver.Chrome(service=service, options=options)
+        print("✅ SeleniumWire driver başlatıldı")
+
+    except ImportError:
+        service = Service(executable_path=driver_path)
+        driver  = webdriver.Chrome(service=service, options=options)
+        print("✅ Selenium driver başlatıldı")
 
     driver.execute_script(
         "Object.defineProperty(navigator, 'webdriver', {get: () => undefined})"
