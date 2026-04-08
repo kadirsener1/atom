@@ -84,7 +84,7 @@ def find_base_url():
 
 # ── Ayarlar ───────────────────────────────────────────
 BASE_URL     = find_base_url()
-OUTPUT_FILE  = "playlist.m3u"
+OUTPUT_FILE  = "playlist1.m3u"
 STATS_FILE   = "stats.json"
 CHROMEDRIVER = os.environ.get("CHROMEDRIVER_PATH", "/usr/local/bin/chromedriver")
 CHROME_BIN   = os.environ.get("CHROME_BIN",        "/usr/local/bin/google-chrome")
