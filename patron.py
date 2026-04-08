@@ -30,7 +30,7 @@ logging.getLogger("selenium").setLevel(logging.ERROR)
 # ═══════════════════════════════════════════════════════
 #  BASE URL OTOMATİK BUL
 # ═══════════════════════════════════════════════════════
-MIN_NUMBER  = 1
+MIN_NUMBER  = 25
 MAX_NUMBER  = 60
 DOMAIN_BASE = "patronizle"
 DOMAIN_TLD  = "cfd"
@@ -77,7 +77,7 @@ def find_base_url():
 
 # ── Ayarlar ───────────────────────────────────────────
 BASE_URL     = find_base_url()
-OUTPUT_FILE  = "playlist.m3u"
+OUTPUT_FILE  = "playlist1.m3u"
 STATS_FILE   = "stats.json"
 CHROMEDRIVER = os.environ.get("CHROMEDRIVER_PATH", "/usr/local/bin/chromedriver")
 CHROME_BIN   = os.environ.get("CHROME_BIN",        "/usr/local/bin/google-chrome")
