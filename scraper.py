@@ -436,6 +436,4 @@ https://atomsportv498.top
 https://atomsportv499.top
 https://atomsportv500.top
 
-    ```
-
-Aktif olana kadar sırayla dener, ilk 200 dönen domain'i seçer ✅
+```
