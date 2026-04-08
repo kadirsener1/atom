@@ -94,6 +94,6 @@ PAGES = [
     {"slug": "matches?id=bein-sports-5",  "name": "beIN Sports 5",  "group": "Spor"},
     {"slug": "matches?id=bein-sports-max-1",  "name": "beIN Sports Max 1",  "group": "Spor"},
 ]
-]
+
 
 # ... (kodun geri kalan kısmı tamamen aynı kalıyor) ...
