@@ -30,7 +30,7 @@ logging.getLogger("selenium").setLevel(logging.ERROR)
 # ═══════════════════════════════════════════════════════
 #  BASE URL OTOMATİK BUL
 # ═══════════════════════════════════════════════════════
-MIN_NUMBER  = 25
+MIN_NUMBER  = 29
 MAX_NUMBER  = 60
 DOMAIN_BASE = "patronizle"
 DOMAIN_TLD  = "cfd"
