@@ -99,28 +99,26 @@ log.info(f"🌐 BASE_URL: {BASE_URL}")
 # ═══════════════════════════════════════════════════════
 PAGES = [
     # ── beIN Sports ───────────────────────────────────
-    {"slug": "ch.html?id=bein1",          "name": "beIN Sports 1",      "group": "Spor"},
-    {"slug": "ch.html?id=bein2",          "name": "beIN Sports 2",      "group": "Spor"},
-    {"slug": "ch.html?id=bein3",          "name": "beIN Sports 3",      "group": "Spor"},
-    {"slug": "ch.html?id=bein4",          "name": "beIN Sports 4",      "group": "Spor"},
-    {"slug": "ch.html?id=bein5",          "name": "beIN Sports 5",      "group": "Spor"},
-    {"slug": "ch.html?id=beinmax1",       "name": "beIN Sports Max 1",  "group": "Spor"},
-    {"slug": "ch.html?id=beinmax2",       "name": "beIN Sports Max 2",  "group": "Spor"},
-    {"slug": "ch.html?id=beinmax3",       "name": "beIN Sports Max 3",  "group": "Spor"},
-    {"slug": "ch.html?id=beinmax4",       "name": "beIN Sports Max 4",  "group": "Spor"},
+    {"slug": "ch.html?id=patron",          "name": "beIN Sports 1",      "group": "Spor"},
+    {"slug": "ch.html?id=b2",          "name": "beIN Sports 2",      "group": "Spor"},
+    {"slug": "ch.html?id=b3",          "name": "beIN Sports 3",      "group": "Spor"},
+    {"slug": "ch.html?id=b4",          "name": "beIN Sports 4",      "group": "Spor"},
+    {"slug": "ch.html?id=b5",          "name": "beIN Sports 5",      "group": "Spor"},
+    {"slug": "ch.html?id=bm1",       "name": "beIN Sports Max 1",  "group": "Spor"},
+    {"slug": "ch.html?id=bm2",       "name": "beIN Sports Max 2",  "group": "Spor"},
     # ── S Sport ───────────────────────────────────────
-    {"slug": "ch.html?id=ssport",         "name": "S Sport",            "group": "Spor"},
-    {"slug": "ch.html?id=ssport2",        "name": "S Sport 2",          "group": "Spor"},
+    {"slug": "ch.html?id=ss",         "name": "S Sport",            "group": "Spor"},
+    {"slug": "ch.html?id=ss2",        "name": "S Sport 2",          "group": "Spor"},
     # ── Tivibu ────────────────────────────────────────
-    {"slug": "ch.html?id=tivibu1",        "name": "Tivibu Spor 1",      "group": "Spor"},
-    {"slug": "ch.html?id=tivibu2",        "name": "Tivibu Spor 2",      "group": "Spor"},
-    {"slug": "ch.html?id=tivibu3",        "name": "Tivibu Spor 3",      "group": "Spor"},
+    {"slug": "ch.html?id=t1",        "name": "Tivibu Spor 1",      "group": "Spor"},
+    {"slug": "ch.html?id=t2",        "name": "Tivibu Spor 2",      "group": "Spor"},
+    {"slug": "ch.html?id=t3",        "name": "Tivibu Spor 3",      "group": "Spor"},
+    {"slug": "ch.html?id=t4",        "name": "Tivibu Spor 4",      "group": "Spor"},
     # ── TRT ───────────────────────────────────────────
     {"slug": "ch.html?id=trtspor",        "name": "TRT Spor",           "group": "Spor"},
-    {"slug": "ch.html?id=trtsporYildiz",  "name": "TRT Spor Yıldız",    "group": "Spor"},
+    {"slug": "ch.html?id=trtspor2",  "name": "TRT Spor Yıldız",    "group": "Spor"},
     # ── Diğer ─────────────────────────────────────────
     {"slug": "ch.html?id=aspor",          "name": "A Spor",             "group": "Spor"},
-    {"slug": "ch.html?id=patron",         "name": "Patron TV",          "group": "Genel"},
     {"slug": "ch.html?id=tv8",            "name": "TV8",                "group": "Genel"},
     {"slug": "ch.html?id=tv85",           "name": "TV8,5",              "group": "Genel"},
 ]
