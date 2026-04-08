@@ -28,57 +28,10 @@ logging.getLogger("selenium").setLevel(logging.ERROR)
 
 
 # ═══════════════════════════════════════════════════════
-#  BASE URL OTOMATİK BUL
+#  BASE URL - SABİT (Hash değişmez)
 # ═══════════════════════════════════════════════════════
-MIN_NUMBER  = 29
-MAX_NUMBER  = 60
-DOMAIN_BASE = "patronizle"
-DOMAIN_TLD  = "cfd"
-
-
-def generate_domains():
-    domains = []
-    for i in range(MIN_NUMBER, MAX_NUMBER + 1):
-        domains.append(f"https://{DOMAIN_BASE}{i}.{DOMAIN_TLD}")
-    return domains
-
-
-def find_base_url():
-    headers = {
-        "User-Agent": (
-            "Mozilla/5.0 (Windows NT 10.0; Win64; x64) "
-            "AppleWebKit/537.36 (KHTML, like Gecko) "
-            "Chrome/120.0.0.0 Safari/537.36"
-        )
-    }
-
-    log.info(f"🔎 Domain taranıyor: {DOMAIN_BASE}{MIN_NUMBER}.{DOMAIN_TLD} → {DOMAIN_BASE}{MAX_NUMBER}.{DOMAIN_TLD}")
-
-    for domain in generate_domains():
-        try:
-            resp = req_lib.get(
-                domain,
-                headers=headers,
-                timeout=8,
-                allow_redirects=False  # ← Redirect takip etme, orijinal URL'yi koru
-            )
-            # 200 veya redirect (301/302) olsa da domain çalışıyor demektir
-            if resp.status_code in (200, 301, 302, 303, 307, 308):
-                final_url = domain.rstrip("/")  # ← Orijinal domain'i kullan
-                log.info(f"  ✅ Aktif domain bulundu: {final_url}")
-                return final_url
-            else:
-                log.debug(f"  {domain} → {resp.status_code}")
-        except Exception as e:
-            log.debug(f"  {domain} → {e}")
-
-    log.warning("⚠️ Çalışan domain bulunamadı, varsayılan kullanılıyor.")
-    return f"https://{DOMAIN_BASE}{MIN_NUMBER}.{DOMAIN_TLD}"
-
-
-# ── Ayarlar ───────────────────────────────────────────
-BASE_URL     = find_base_url()
-OUTPUT_FILE  = "playlist1.m3u"
+BASE_URL     = "https://main.uxsyplayer0e0c6aba22.click"
+OUTPUT_FILE  = "playlist.m3u"
 STATS_FILE   = "stats.json"
 CHROMEDRIVER = os.environ.get("CHROMEDRIVER_PATH", "/usr/local/bin/chromedriver")
 CHROME_BIN   = os.environ.get("CHROME_BIN",        "/usr/local/bin/google-chrome")
@@ -89,38 +42,39 @@ log.info(f"🌐 BASE_URL: {BASE_URL}")
 
 # ═══════════════════════════════════════════════════════
 #  TARANACAK SAYFALAR
-#  Format: BASE_URL/ch.html?id=ID
+#  Format: BASE_URL/index.php?id=KANAL_ID
 # ═══════════════════════════════════════════════════════
 PAGES = [
-    # ── Patron TV ─────────────────────────────────────
-    {"slug": "ch.html?id=patron",   "name": "Patron TV",          "group": "Genel"},
-
     # ── beIN Sports ───────────────────────────────────
-    {"slug": "ch.html?id=patron",       "name": "beIN Sports 1",      "group": "Spor"},
-    {"slug": "ch.html?id=b2",       "name": "beIN Sports 2",      "group": "Spor"},
-    {"slug": "ch.html?id=b3",       "name": "beIN Sports 3",      "group": "Spor"},
-    {"slug": "ch.html?id=b4",       "name": "beIN Sports 4",      "group": "Spor"},
-    {"slug": "ch.html?id=b5",       "name": "beIN Sports 5",      "group": "Spor"},
-    {"slug": "ch.html?id=bm1",      "name": "beIN Sports Max 1",  "group": "Spor"},
-    {"slug": "ch.html?id=bm2",      "name": "beIN Sports Max 2",  "group": "Spor"},
-
+    {"slug": "index.php?id=xbeinsports-1",    "name": "beIN Sports 1",      "group": "Spor"},
+    {"slug": "index.php?id=xbeinsports-2",    "name": "beIN Sports 2",      "group": "Spor"},
+    {"slug": "index.php?id=xbeinsports-3",    "name": "beIN Sports 3",      "group": "Spor"},
+    {"slug": "index.php?id=xbeinsports-4",    "name": "beIN Sports 4",      "group": "Spor"},
+    {"slug": "index.php?id=xbeinsports-5",    "name": "beIN Sports 5",      "group": "Spor"},
+    {"slug": "index.php?id=xbeinsports-6",    "name": "beIN Sports 6",      "group": "Spor"},
+    {"slug": "index.php?id=xbeinsports-7",    "name": "beIN Sports 7",      "group": "Spor"},
+    {"slug": "index.php?id=xbeinsports-8",    "name": "beIN Sports 8",      "group": "Spor"},
+    {"slug": "index.php?id=xbeinsports-9",    "name": "beIN Sports 9",      "group": "Spor"},
+    {"slug": "index.php?id=xbeinsports-10",   "name": "beIN Sports 10",     "group": "Spor"},
+    # ── beIN Sports Max ───────────────────────────────
+    {"slug": "index.php?id=xbeinsportsmax-1", "name": "beIN Sports Max 1",  "group": "Spor"},
+    {"slug": "index.php?id=xbeinsportsmax-2", "name": "beIN Sports Max 2",  "group": "Spor"},
+    {"slug": "index.php?id=xbeinsportsmax-3", "name": "beIN Sports Max 3",  "group": "Spor"},
+    {"slug": "index.php?id=xbeinsportsmax-4", "name": "beIN Sports Max 4",  "group": "Spor"},
     # ── S Sport ───────────────────────────────────────
-    {"slug": "ch.html?id=ss1",      "name": "S Sport",            "group": "Spor"},
-    {"slug": "ch.html?id=ss2",      "name": "S Sport 2",          "group": "Spor"},
-
+    {"slug": "index.php?id=xssport-1",        "name": "S Sport",            "group": "Spor"},
+    {"slug": "index.php?id=xssport-2",        "name": "S Sport 2",          "group": "Spor"},
     # ── Tivibu ────────────────────────────────────────
-    {"slug": "ch.html?id=t1",      "name": "Tivibu Spor 1",      "group": "Spor"},
-    {"slug": "ch.html?id=t2",      "name": "Tivibu Spor 2",      "group": "Spor"},
-    {"slug": "ch.html?id=t3",      "name": "Tivibu Spor 3",      "group": "Spor"},
-    {"slug": "ch.html?id=t4",      "name": "Tivibu Spor 4",      "group": "Spor"},
+    {"slug": "index.php?id=xtivibu-1",        "name": "Tivibu Spor 1",      "group": "Spor"},
+    {"slug": "index.php?id=xtivibu-2",        "name": "Tivibu Spor 2",      "group": "Spor"},
+    {"slug": "index.php?id=xtivibu-3",        "name": "Tivibu Spor 3",      "group": "Spor"},
     # ── TRT ───────────────────────────────────────────
-    {"slug": "ch.html?id=trtspor",      "name": "TRT Spor",           "group": "Spor"},
-    {"slug": "ch.html?id=trtspor2",     "name": "TRT Spor Yıldız",    "group": "Spor"},
-
+    {"slug": "index.php?id=xtrtspor",         "name": "TRT Spor",           "group": "Spor"},
+    {"slug": "index.php?id=xtrtspor2",        "name": "TRT Spor Yıldız",    "group": "Spor"},
     # ── Diğer ─────────────────────────────────────────
-    {"slug": "ch.html?id=as",       "name": "A Spor",             "group": "Spor"},
-    {"slug": "ch.html?id=tv8",      "name": "TV8",                "group": "Genel"},
-    {"slug": "ch.html?id=tv85",     "name": "TV8,5",              "group": "Genel"},
+    {"slug": "index.php?id=xaspor",           "name": "A Spor",             "group": "Spor"},
+    {"slug": "index.php?id=xtv8",             "name": "TV8",                "group": "Genel"},
+    {"slug": "index.php?id=xtv85",            "name": "TV8,5",              "group": "Genel"},
 ]
 
 
@@ -476,7 +430,7 @@ def create_m3u(channels):
     now   = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
     lines = [
         "#EXTM3U\n",
-        f"# Site      : patronizle\n",
+        f"# Site      : uxsyplayer\n",
         f"# Güncelleme: {now}\n",
         f"# Toplam    : {len(channels)} kanal\n\n",
     ]
@@ -495,7 +449,7 @@ def create_m3u(channels):
 # ═══════════════════════════════════════════════════════
 def main():
     log.info("=" * 55)
-    log.info("   M3U8 Scraper → PATRONİZLE")
+    log.info("   M3U8 Scraper → UXSYPLAYER")
     log.info(f"   Base URL : {BASE_URL}")
     log.info(f"   Toplam   : {len(PAGES)} sayfa")
     log.info("=" * 55)
@@ -545,7 +499,7 @@ def main():
 
     with open(STATS_FILE, "w", encoding="utf-8") as f:
         json.dump({
-            "site"           : "patronizle",
+            "site"           : "uxsyplayer",
             "last_update"    : datetime.now().isoformat(),
             "base_url"       : BASE_URL,
             "total_channels" : len(channels),
