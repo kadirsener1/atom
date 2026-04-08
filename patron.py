@@ -60,11 +60,12 @@ def find_base_url():
                 domain,
                 headers=headers,
                 timeout=8,
-                allow_redirects=True
+                allow_redirects=False  # ← Redirect takip etme, orijinal URL'yi koru
             )
-            if resp.status_code == 200:
-                final_url = resp.url.rstrip("/")
-                log.info(f"  ✅ Aktif domain: {final_url}")
+            # 200 veya redirect (301/302) olsa da domain çalışıyor demektir
+            if resp.status_code in (200, 301, 302, 303, 307, 308):
+                final_url = domain.rstrip("/")  # ← Orijinal domain'i kullan
+                log.info(f"  ✅ Aktif domain bulundu: {final_url}")
                 return final_url
             else:
                 log.debug(f"  {domain} → {resp.status_code}")
