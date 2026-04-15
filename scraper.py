@@ -99,6 +99,7 @@ PAGES = [
     {"slug": "matches?id=tivibu-spor-1",  "name": "Tivibu Spor 1",  "group": "Spor"},
     {"slug": "matches?id=tivibu-spor-2",  "name": "Tivibu Spor 2",  "group": "Spor"},
     {"slug": "matches?id=tivibu-spor-3",  "name": "Tivibu Spor 3",  "group": "Spor"},
+    {"slug": "matches?id=tivibu-spor-4",  "name": "Tivibu Spor 4",  "group": "Spor"},
 ]
 
 
