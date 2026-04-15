@@ -215,20 +215,21 @@ def scrape_page(driver, page):
     log.info(f"  📡 M3U8 bekleniyor (max {STREAM_WAIT}s)...")
     m3u8_url = None
 
-    if WIRE:
-        for elapsed in range(STREAM_WAIT):
-            for req in driver.requests:
-                slug_id = slug.split("=")[-1]
+  if WIRE:
+    slug_id = slug.split("=")[-1]
+    m3u8_url = None
 
-for elapsed in range(STREAM_WAIT):
-    for req in driver.requests:
-        if is_m3u8(req.url) and slug_id in req.url:
-            m3u8_url = req.url
-            log.info(f"  🎯 DOĞRU kanal bulundu: {m3u8_url}")
+    for elapsed in range(STREAM_WAIT):
+        for req in driver.requests:
+            if is_m3u8(req.url) and slug_id in req.url:
+                m3u8_url = req.url
+                log.info(f"  🎯 DOĞRU kanal bulundu: {m3u8_url}")
+                break
+
+        if m3u8_url:
             break
-    if m3u8_url:
-        break
-    time.sleep(1)
+
+        time.sleep(1)
     else:
         time.sleep(STREAM_WAIT)
 
