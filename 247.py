@@ -405,7 +405,7 @@ def main():
             "duration_sec"   : elapsed,
             "base_url"       : BASE_URL,
             "channels"       : channels
-        }, f, ensure_ascii=False, indent =2)
+        }, f, ensure_ascii=False, indent=2)
     log.info(f"✅ {STATS_FILE} kaydedildi")
 
     if not channels:
