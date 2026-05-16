@@ -9,8 +9,8 @@ from urllib.parse import urljoin, urlparse
 # ============ AYARLAR ============
 TARGET_URL = "https://atomsportv503.top"
 GITHUB_TOKEN = "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"  # GitHub Personal Access Token
-GITHUB_REPO = "kadirsener1/atom"       # GitHub repo adı
-GITHUB_FILE_PATH = "playlist.m3u"        # Kaydedilecek dosya adı
+GITHUB_REPO = "kadirsener1/İptv-bot"       # GitHub repo adı
+GITHUB_FILE_PATH = "cafe.m3u"        # Kaydedilecek dosya adı
 # =================================
 
 HEADERS = {
