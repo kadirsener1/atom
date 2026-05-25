@@ -99,6 +99,7 @@ PAGES = [
     {"slug": "matches?id=bein-sports-max-2", "name": "beIN Sports Max 2", "group": "Spor"},
     {"slug": "matches?id=s-sport",           "name": "S Sport",           "group": "Spor"},
     {"slug": "matches?id=s-sport-2",         "name": "S Sport 2",         "group": "Spor"},
+    {"slug": "matches?id=a-spor",             "name": "A Spor",     "group": "Spor"},
     {"slug": "matches?id=tivibu-spor-1",     "name": "Tivibu Spor 1",     "group": "Spor"},
     {"slug": "matches?id=tivibu-spor-2",     "name": "Tivibu Spor 2",     "group": "Spor"},
     {"slug": "matches?id=tivibu-spor-3",     "name": "Tivibu Spor 3",     "group": "Spor"},
