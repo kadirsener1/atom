@@ -1,0 +1,331 @@
+2026-06-23 01:32:35,281 [INFO] 🌐 BASE_URL: https://atomsportv508.top
+2026-06-23 01:32:36,498 [INFO] Başlanıyor... 14 kanal taranacak
+2026-06-23 01:32:36,498 [INFO] Using default request storage
+2026-06-23 01:32:36,503 [INFO] Created proxy listening on 127.0.0.1:32993
+2026-06-23 01:32:37,169 [INFO] Capturing request: http://clients2.google.com/time/1/current?cup2key=10:Y5MMJmpudBoSuF8RnAzYuEdLofZkmgncGvWK4K9-Gp8&cup2hreq=e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+2026-06-23 01:32:37,273 [INFO] Capturing response: http://clients2.google.com/time/1/current?cup2key=10:Y5MMJmpudBoSuF8RnAzYuEdLofZkmgncGvWK4K9-Gp8&cup2hreq=e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855 200 OK
+2026-06-23 01:32:37,323 [INFO] 
+[1/14]
+2026-06-23 01:32:37,324 [INFO] 🔍 beIN Sports 1 → https://atomsportv508.top/matches?id=bein-sports-1
+2026-06-23 01:32:37,427 [INFO] Capturing request: https://accounts.google.com/ListAccounts?gpsia=1&source=ChromiumBrowser&json=standard&laf=b64bin
+2026-06-23 01:32:37,430 [INFO] Capturing request: https://update.googleapis.com/service/update2/json?cup2key=16:HAQ7ckg9zHxPTxClzrOhXAoHk-fOqLEl3Vph04kFWP4&cup2hreq=da396e1c8c7a4c014efc9c504948267fbf3ebb8aeff2ac0ca9ad2ea0fa8f5fee
+2026-06-23 01:32:37,509 [INFO] Capturing response: https://accounts.google.com/ListAccounts?gpsia=1&source=ChromiumBrowser&json=standard&laf=b64bin 200 
+2026-06-23 01:32:37,512 [INFO] Capturing response: https://update.googleapis.com/service/update2/json?cup2key=16:HAQ7ckg9zHxPTxClzrOhXAoHk-fOqLEl3Vph04kFWP4&cup2hreq=da396e1c8c7a4c014efc9c504948267fbf3ebb8aeff2ac0ca9ad2ea0fa8f5fee 200 
+2026-06-23 01:32:37,526 [INFO] Capturing request: https://atomsportv508.top/matches?id=bein-sports-1
+2026-06-23 01:32:37,558 [INFO] Capturing request: https://update.googleapis.com/service/update2/json?cup2key=16:FzwyaXizZhCHTCFSJr-m-IEgHIAN88SnIFgptAoIuQw&cup2hreq=e3f7a9e3c0c6bef5788991b408ae1a1d05018f5e1e8ef9b492266d94d729ca05
+2026-06-23 01:32:37,610 [INFO] Capturing response: https://update.googleapis.com/service/update2/json?cup2key=16:FzwyaXizZhCHTCFSJr-m-IEgHIAN88SnIFgptAoIuQw&cup2hreq=e3f7a9e3c0c6bef5788991b408ae1a1d05018f5e1e8ef9b492266d94d729ca05 200 
+2026-06-23 01:32:37,863 [INFO] Capturing request: https://www.google.com/async/folae?async=_fmt:pb&udm=50&client_locale=en-US&client_country=ZZ
+2026-06-23 01:32:37,906 [INFO] Capturing response: https://www.google.com/async/folae?async=_fmt:pb&udm=50&client_locale=en-US&client_country=ZZ 200 
+2026-06-23 01:32:38,196 [INFO] Capturing response: https://atomsportv508.top/matches?id=bein-sports-1 200 
+2026-06-23 01:32:38,348 [INFO] Capturing request: https://atomsportv508.top/assets/js/clappr.js
+2026-06-23 01:32:38,387 [INFO] Capturing response: https://atomsportv508.top/assets/js/clappr.js 200 
+2026-06-23 01:32:38,423 [INFO] Capturing request: https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js
+2026-06-23 01:32:38,456 [INFO] Capturing request: https://cdn.jsdelivr.net/npm/@clappr/player@latest/dist/clappr.min.js
+2026-06-23 01:32:38,461 [INFO] Capturing response: https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js 200 
+2026-06-23 01:32:38,563 [INFO] Capturing response: https://cdn.jsdelivr.net/npm/@clappr/player@latest/dist/clappr.min.js 200 
+2026-06-23 01:32:38,694 [INFO] Capturing request: https://static.cloudflareinsights.com/beacon.min.js/v833ccba57c9e4d2798f2e76cebdd09a11778172276447
+2026-06-23 01:32:38,725 [INFO] Capturing response: https://static.cloudflareinsights.com/beacon.min.js/v833ccba57c9e4d2798f2e76cebdd09a11778172276447 200 
+2026-06-23 01:32:38,784 [INFO] Capturing request: https://atomsportv508.top/cdn-cgi/rum?
+2026-06-23 01:32:38,889 [INFO] Capturing request: https://atomsportv508.top/favicon.ico
+2026-06-23 01:32:38,958 [INFO] Capturing response: https://atomsportv508.top/cdn-cgi/rum? 204 
+2026-06-23 01:32:38,963 [INFO] Capturing response: https://atomsportv508.top/favicon.ico 200 
+2026-06-23 01:32:39,018 [INFO] Capturing request: https://teletv5.top/load/yayinlink.php?id=bein-sports-1
+2026-06-23 01:32:39,411 [INFO] Capturing response: https://teletv5.top/load/yayinlink.php?id=bein-sports-1 200 
+2026-06-23 01:32:39,418 [INFO] Capturing request: https://streamsport365.com/cinema
+2026-06-23 01:32:39,724 [INFO] Capturing response: https://streamsport365.com/cinema 200 
+2026-06-23 01:32:39,856 [INFO] Capturing request: https://atomsportv508.top/assets/img/player_logo_6880e4e4c52ee.png
+2026-06-23 01:32:39,923 [INFO] Capturing response: https://atomsportv508.top/assets/img/player_logo_6880e4e4c52ee.png 200 
+2026-06-23 01:32:39,977 [INFO] Capturing request: https://hlssssssssssssssssss.yedeklinksa35.workers.dev/https://corestream.ronaldovurdu.help//aspor/tracks-v1a1/mono.m3u8
+2026-06-23 01:32:40,330 [INFO] Capturing response: https://hlssssssssssssssssss.yedeklinksa35.workers.dev/https://corestream.ronaldovurdu.help//aspor/tracks-v1a1/mono.m3u8 200 
+2026-06-23 01:32:40,585 [INFO] Capturing request: https://ts.yedeklinksa35.workers.dev/aspor/tracks-v1a1/2026/06/23/01/33/17-06000.avif
+2026-06-23 01:32:40,716 [INFO] Capturing request: https://android.clients.google.com/checkin
+2026-06-23 01:32:40,815 [INFO] Capturing response: https://android.clients.google.com/checkin 200 
+2026-06-23 01:32:40,863 [INFO] Capturing request: https://android.clients.google.com/c2dm/register3
+2026-06-23 01:32:40,869 [INFO] Capturing request: https://android.clients.google.com/c2dm/register3
+2026-06-23 01:32:40,870 [INFO] Capturing request: https://android.clients.google.com/c2dm/register3
+2026-06-23 01:32:40,922 [INFO] Capturing response: https://android.clients.google.com/c2dm/register3 301 
+2026-06-23 01:32:41,387 [INFO] Capturing response: https://android.clients.google.com/c2dm/register3 200 
+2026-06-23 01:32:41,532 [INFO] Capturing response: https://android.clients.google.com/c2dm/register3 200 
+2026-06-23 01:32:41,808 [INFO]   ✅ M3U8 bulundu: https://hlssssssssssssssssss.yedeklinksa35.workers.dev/https://corestream.ronaldovurdu.help//aspor/tracks-v1a1/mono.m3u8
+2026-06-23 01:32:42,594 [INFO] Capturing response: https://ts.yedeklinksa35.workers.dev/aspor/tracks-v1a1/2026/06/23/01/33/17-06000.avif 200 
+2026-06-23 01:32:42,809 [INFO] 
+[2/14]
+2026-06-23 01:32:42,809 [INFO] 🔍 beIN Sports 2 → https://atomsportv508.top/matches?id=bein-sports-2
+2026-06-23 01:32:42,855 [INFO] Capturing request: https://ts.yedeklinksa35.workers.dev/aspor/tracks-v1a1/2026/06/23/01/33/23-06000.avif
+2026-06-23 01:32:42,937 [INFO] Capturing request: https://atomsportv508.top/matches?id=bein-sports-2
+2026-06-23 01:32:43,001 [INFO] Capturing response: https://atomsportv508.top/matches?id=bein-sports-2 200 
+2026-06-23 01:32:43,012 [INFO] Capturing request: https://atomsportv508.top/cdn-cgi/rum?
+2026-06-23 01:32:43,068 [INFO] Capturing request: https://streamsport365.com/cinema
+2026-06-23 01:32:43,071 [INFO] Capturing request: https://atomsportv508.top/cdn-cgi/rum?
+2026-06-23 01:32:43,144 [INFO] Capturing response: https://atomsportv508.top/cdn-cgi/rum? 204 
+2026-06-23 01:32:43,161 [INFO] Capturing request: https://teletv5.top/load/yayinlink.php?id=bein-sports-2
+2026-06-23 01:32:43,172 [INFO] Capturing request: https://atomsportv508.top/favicon.ico
+2026-06-23 01:32:43,223 [INFO] Capturing response: https://atomsportv508.top/favicon.ico 200 
+2026-06-23 01:32:43,242 [INFO] Capturing response: https://atomsportv508.top/cdn-cgi/rum? 204 
+2026-06-23 01:32:43,371 [INFO] Capturing response: https://teletv5.top/load/yayinlink.php?id=bein-sports-2 200 
+2026-06-23 01:32:43,383 [INFO] Capturing response: https://streamsport365.com/cinema 200 
+2026-06-23 01:32:43,505 [INFO] Capturing request: https://hlssssssssssssssssss.yedeklinksa35.workers.dev/https://corestream.ronaldovurdu.help//bein2/tracks-v1a1/mono.m3u8
+2026-06-23 01:32:43,939 [INFO] Capturing response: https://hlssssssssssssssssss.yedeklinksa35.workers.dev/https://corestream.ronaldovurdu.help//bein2/tracks-v1a1/mono.m3u8 200 
+2026-06-23 01:32:44,049 [INFO] Capturing request: https://ts.yedeklinksa35.workers.dev/bein2/tracks-v1a1/2026/06/23/01/32/44-13800.avif
+2026-06-23 01:32:44,878 [INFO] Capturing response: https://ts.yedeklinksa35.workers.dev/aspor/tracks-v1a1/2026/06/23/01/33/23-06000.avif 200 
+2026-06-23 01:32:46,083 [INFO]   ✅ M3U8 bulundu: https://hlssssssssssssssssss.yedeklinksa35.workers.dev/https://corestream.ronaldovurdu.help//bein2/tracks-v1a1/mono.m3u8
+2026-06-23 01:32:46,349 [INFO] Capturing response: https://ts.yedeklinksa35.workers.dev/bein2/tracks-v1a1/2026/06/23/01/32/44-13800.avif 200 
+2026-06-23 01:32:46,627 [INFO] Capturing request: https://ts.yedeklinksa35.workers.dev/bein2/tracks-v1a1/2026/06/23/01/32/58-10000.avif
+2026-06-23 01:32:47,083 [INFO] 
+[3/14]
+2026-06-23 01:32:47,083 [INFO] 🔍 beIN Sports 3 → https://atomsportv508.top/matches?id=bein-sports-3
+2026-06-23 01:32:47,201 [INFO] Capturing request: https://atomsportv508.top/matches?id=bein-sports-3
+2026-06-23 01:32:47,202 [INFO] Capturing request: https://atomsportv508.top/assets/js/clappr.js
+2026-06-23 01:32:47,267 [INFO] Capturing response: https://atomsportv508.top/matches?id=bein-sports-3 200 
+2026-06-23 01:32:47,277 [INFO] Capturing request: https://atomsportv508.top/cdn-cgi/rum?
+2026-06-23 01:32:47,287 [INFO] Capturing response: https://atomsportv508.top/assets/js/clappr.js 200 
+2026-06-23 01:32:47,311 [INFO] Capturing request: https://atomsportv508.top/cdn-cgi/rum?
+2026-06-23 01:32:47,411 [INFO] Capturing request: https://teletv5.top/load/yayinlink.php?id=bein-sports-3
+2026-06-23 01:32:47,412 [INFO] Capturing request: https://atomsportv508.top/favicon.ico
+2026-06-23 01:32:47,430 [INFO] Capturing response: https://atomsportv508.top/cdn-cgi/rum? 204 
+2026-06-23 01:32:47,440 [INFO] Capturing response: https://atomsportv508.top/cdn-cgi/rum? 204 
+2026-06-23 01:32:47,458 [INFO] Capturing response: https://atomsportv508.top/favicon.ico 200 
+2026-06-23 01:32:47,540 [INFO] Capturing request: https://streamsport365.com/cinema
+2026-06-23 01:32:47,618 [INFO] Capturing response: https://teletv5.top/load/yayinlink.php?id=bein-sports-3 200 
+2026-06-23 01:32:47,850 [INFO] Capturing response: https://streamsport365.com/cinema 200 
+2026-06-23 01:32:48,011 [INFO] Capturing response: https://ts.yedeklinksa35.workers.dev/bein2/tracks-v1a1/2026/06/23/01/32/58-10000.avif 200 
+2026-06-23 01:33:10,375 [INFO] Capturing request: https://android.clients.google.com/c2dm/register3
+2026-06-23 01:33:10,422 [INFO] Capturing response: https://android.clients.google.com/c2dm/register3 301 
+2026-06-23 01:33:20,624 [WARNING]   ❌ beIN Sports 3 için M3U8 bulunamadı
+2026-06-23 01:33:21,625 [INFO] 
+[4/14]
+2026-06-23 01:33:21,625 [INFO] 🔍 beIN Sports 4 → https://atomsportv508.top/matches?id=bein-sports-4
+2026-06-23 01:33:21,737 [INFO] Capturing request: https://atomsportv508.top/assets/js/clappr.js
+2026-06-23 01:33:21,738 [INFO] Capturing request: https://atomsportv508.top/matches?id=bein-sports-4
+2026-06-23 01:33:21,771 [INFO] Capturing response: https://atomsportv508.top/assets/js/clappr.js 200 
+2026-06-23 01:33:22,080 [INFO] Capturing response: https://atomsportv508.top/matches?id=bein-sports-4 200 
+2026-06-23 01:33:22,091 [INFO] Capturing request: https://atomsportv508.top/cdn-cgi/rum?
+2026-06-23 01:33:22,122 [INFO] Capturing request: https://atomsportv508.top/cdn-cgi/rum?
+2026-06-23 01:33:22,218 [INFO] Capturing request: https://teletv5.top/load/yayinlink.php?id=bein-sports-4
+2026-06-23 01:33:22,224 [INFO] Capturing response: https://atomsportv508.top/cdn-cgi/rum? 204 
+2026-06-23 01:33:22,227 [INFO] Capturing request: https://atomsportv508.top/favicon.ico
+2026-06-23 01:33:22,274 [INFO] Capturing response: https://atomsportv508.top/favicon.ico 200 
+2026-06-23 01:33:22,293 [INFO] Capturing response: https://atomsportv508.top/cdn-cgi/rum? 204 
+2026-06-23 01:33:22,350 [INFO] Capturing request: https://streamsport365.com/cinema
+2026-06-23 01:33:22,427 [INFO] Capturing response: https://teletv5.top/load/yayinlink.php?id=bein-sports-4 200 
+2026-06-23 01:33:22,673 [INFO] Capturing response: https://streamsport365.com/cinema 200 
+2026-06-23 01:33:37,155 [INFO] Capturing request: https://update.googleapis.com/service/update2/json?cup2key=16:RzUsnfphvJWKiWVYSx2q_xKlfjPYvYrNOqnWKwWV9x0&cup2hreq=5428715629df25eae974ca58f05aa4deefbd5639837b19cddd42cf06657fec03
+2026-06-23 01:33:37,208 [INFO] Capturing response: https://update.googleapis.com/service/update2/json?cup2key=16:RzUsnfphvJWKiWVYSx2q_xKlfjPYvYrNOqnWKwWV9x0&cup2hreq=5428715629df25eae974ca58f05aa4deefbd5639837b19cddd42cf06657fec03 200 
+2026-06-23 01:33:37,215 [INFO] Capturing request: http://edgedl.me.gvt1.com/edgedl/diffgen-puffin/gcmjkmgdlgnkkcocmoeiminaijmmjnii/df2a22d5ecc7788c3330ebd5f856b41531c74f412a01ed7453d11284708009fe
+2026-06-23 01:33:37,261 [INFO] Capturing response: http://edgedl.me.gvt1.com/edgedl/diffgen-puffin/gcmjkmgdlgnkkcocmoeiminaijmmjnii/df2a22d5ecc7788c3330ebd5f856b41531c74f412a01ed7453d11284708009fe 200 OK
+2026-06-23 01:33:37,290 [INFO] Capturing request: https://update.googleapis.com/service/update2/json
+2026-06-23 01:33:37,342 [INFO] Capturing response: https://update.googleapis.com/service/update2/json 200 
+2026-06-23 01:33:37,387 [INFO] Capturing request: http://edgedl.me.gvt1.com/edgedl/release2/chrome_component/a6ij3ah5si6pnbzg6m75ljdwqu_10601/hfnkpimlhhgieaddgfemjhofmfblmnib_10601_all_fzkgn2cmctvcq46xe7o7okow2a.crx3
+2026-06-23 01:33:37,448 [INFO] Capturing response: http://edgedl.me.gvt1.com/edgedl/release2/chrome_component/a6ij3ah5si6pnbzg6m75ljdwqu_10601/hfnkpimlhhgieaddgfemjhofmfblmnib_10601_all_fzkgn2cmctvcq46xe7o7okow2a.crx3 200 OK
+2026-06-23 01:33:37,478 [INFO] Capturing request: https://update.googleapis.com/service/update2/json
+2026-06-23 01:33:37,512 [INFO] Capturing response: https://update.googleapis.com/service/update2/json 200 
+2026-06-23 01:33:55,420 [WARNING]   ❌ beIN Sports 4 için M3U8 bulunamadı
+2026-06-23 01:33:56,420 [INFO] 
+[5/14]
+2026-06-23 01:33:56,420 [INFO] 🔍 beIN Sports 5 → https://atomsportv508.top/matches?id=bein-sports-5
+2026-06-23 01:33:56,599 [INFO] Capturing request: https://atomsportv508.top/matches?id=bein-sports-5
+2026-06-23 01:33:56,601 [INFO] Capturing request: https://atomsportv508.top/assets/js/clappr.js
+2026-06-23 01:33:56,708 [INFO] Capturing response: https://atomsportv508.top/matches?id=bein-sports-5 200 
+2026-06-23 01:33:56,710 [INFO] Capturing response: https://atomsportv508.top/assets/js/clappr.js 200 
+2026-06-23 01:33:56,717 [INFO] Capturing request: https://atomsportv508.top/cdn-cgi/rum?
+2026-06-23 01:33:56,750 [INFO] Capturing request: https://atomsportv508.top/cdn-cgi/rum?
+2026-06-23 01:33:56,852 [INFO] Capturing request: https://atomsportv508.top/favicon.ico
+2026-06-23 01:33:56,873 [INFO] Capturing response: https://atomsportv508.top/cdn-cgi/rum? 204 
+2026-06-23 01:33:56,885 [INFO] Capturing response: https://atomsportv508.top/cdn-cgi/rum? 204 
+2026-06-23 01:33:56,901 [INFO] Capturing request: https://teletv5.top/load/yayinlink.php?id=bein-sports-5
+2026-06-23 01:33:56,939 [INFO] Capturing response: https://atomsportv508.top/favicon.ico 200 
+2026-06-23 01:33:57,227 [INFO] Capturing response: https://teletv5.top/load/yayinlink.php?id=bein-sports-5 200 
+2026-06-23 01:33:57,368 [INFO] Capturing request: https://streamsport365.com/cinema
+2026-06-23 01:33:57,681 [INFO] Capturing response: https://streamsport365.com/cinema 200 
+2026-06-23 01:33:58,372 [INFO] Capturing request: https://android.clients.google.com/c2dm/register3
+2026-06-23 01:33:58,430 [INFO] Capturing response: https://android.clients.google.com/c2dm/register3 301 
+2026-06-23 01:34:30,026 [WARNING]   ❌ beIN Sports 5 için M3U8 bulunamadı
+2026-06-23 01:34:31,026 [INFO] 
+[6/14]
+2026-06-23 01:34:31,026 [INFO] 🔍 beIN Sports Max 1 → https://atomsportv508.top/matches?id=bein-sports-max-1
+2026-06-23 01:34:31,135 [INFO] Capturing request: https://atomsportv508.top/assets/js/clappr.js
+2026-06-23 01:34:31,137 [INFO] Capturing request: https://atomsportv508.top/matches?id=bein-sports-max-1
+2026-06-23 01:34:31,177 [INFO] Capturing response: https://atomsportv508.top/assets/js/clappr.js 200 
+2026-06-23 01:34:31,795 [INFO] Capturing response: https://atomsportv508.top/matches?id=bein-sports-max-1 200 
+2026-06-23 01:34:31,804 [INFO] Capturing request: https://atomsportv508.top/cdn-cgi/rum?
+2026-06-23 01:34:31,837 [INFO] Capturing request: https://atomsportv508.top/cdn-cgi/rum?
+2026-06-23 01:34:31,932 [INFO] Capturing request: https://teletv5.top/load/yayinlink.php?id=bein-sports-max-1
+2026-06-23 01:34:31,940 [INFO] Capturing request: https://atomsportv508.top/favicon.ico
+2026-06-23 01:34:31,959 [INFO] Capturing response: https://atomsportv508.top/cdn-cgi/rum? 204 
+2026-06-23 01:34:31,972 [INFO] Capturing response: https://atomsportv508.top/cdn-cgi/rum? 204 
+2026-06-23 01:34:31,995 [INFO] Capturing response: https://atomsportv508.top/favicon.ico 200 
+2026-06-23 01:34:32,065 [INFO] Capturing request: https://streamsport365.com/cinema
+2026-06-23 01:34:32,215 [INFO] Capturing response: https://teletv5.top/load/yayinlink.php?id=bein-sports-max-1 200 
+2026-06-23 01:34:32,376 [INFO] Capturing response: https://streamsport365.com/cinema 200 
+2026-06-23 01:35:05,109 [WARNING]   ❌ beIN Sports Max 1 için M3U8 bulunamadı
+2026-06-23 01:35:06,109 [INFO] 
+[7/14]
+2026-06-23 01:35:06,110 [INFO] 🔍 beIN Sports Max 2 → https://atomsportv508.top/matches?id=bein-sports-max-2
+2026-06-23 01:35:06,219 [INFO] Capturing request: https://atomsportv508.top/assets/js/clappr.js
+2026-06-23 01:35:06,222 [INFO] Capturing request: https://atomsportv508.top/matches?id=bein-sports-max-2
+2026-06-23 01:35:06,268 [INFO] Capturing response: https://atomsportv508.top/assets/js/clappr.js 200 
+2026-06-23 01:35:06,634 [INFO] Capturing response: https://atomsportv508.top/matches?id=bein-sports-max-2 200 
+2026-06-23 01:35:06,644 [INFO] Capturing request: https://atomsportv508.top/cdn-cgi/rum?
+2026-06-23 01:35:06,681 [INFO] Capturing request: https://atomsportv508.top/cdn-cgi/rum?
+2026-06-23 01:35:06,779 [INFO] Capturing request: https://teletv5.top/load/yayinlink.php?id=bein-sports-max-2
+2026-06-23 01:35:06,785 [INFO] Capturing request: https://atomsportv508.top/favicon.ico
+2026-06-23 01:35:06,786 [INFO] Capturing response: https://atomsportv508.top/cdn-cgi/rum? 204 
+2026-06-23 01:35:06,835 [INFO] Capturing response: https://atomsportv508.top/favicon.ico 200 
+2026-06-23 01:35:06,857 [INFO] Capturing response: https://atomsportv508.top/cdn-cgi/rum? 204 
+2026-06-23 01:35:06,903 [INFO] Capturing request: https://streamsport365.com/cinema
+2026-06-23 01:35:06,954 [INFO] Capturing response: https://teletv5.top/load/yayinlink.php?id=bein-sports-max-2 200 
+2026-06-23 01:35:07,218 [INFO] Capturing response: https://streamsport365.com/cinema 200 
+2026-06-23 01:35:39,956 [WARNING]   ❌ beIN Sports Max 2 için M3U8 bulunamadı
+2026-06-23 01:35:40,957 [INFO] 
+[8/14]
+2026-06-23 01:35:40,957 [INFO] 🔍 S Sport → https://atomsportv508.top/matches?id=s-sport
+2026-06-23 01:35:41,066 [INFO] Capturing request: https://atomsportv508.top/assets/js/clappr.js
+2026-06-23 01:35:41,067 [INFO] Capturing request: https://atomsportv508.top/matches?id=s-sport
+2026-06-23 01:35:41,128 [INFO] Capturing response: https://atomsportv508.top/assets/js/clappr.js 200 
+2026-06-23 01:35:41,462 [INFO] Capturing response: https://atomsportv508.top/matches?id=s-sport 200 
+2026-06-23 01:35:41,471 [INFO] Capturing request: https://atomsportv508.top/cdn-cgi/rum?
+2026-06-23 01:35:41,510 [INFO] Capturing request: https://atomsportv508.top/cdn-cgi/rum?
+2026-06-23 01:35:41,595 [INFO] Capturing request: https://teletv5.top/load/yayinlink.php?id=s-sport
+2026-06-23 01:35:41,612 [INFO] Capturing response: https://atomsportv508.top/cdn-cgi/rum? 204 
+2026-06-23 01:35:41,613 [INFO] Capturing request: https://atomsportv508.top/favicon.ico
+2026-06-23 01:35:41,668 [INFO] Capturing response: https://atomsportv508.top/favicon.ico 200 
+2026-06-23 01:35:41,686 [INFO] Capturing response: https://atomsportv508.top/cdn-cgi/rum? 204 
+2026-06-23 01:35:41,734 [INFO] Capturing request: https://streamsport365.com/cinema
+2026-06-23 01:35:42,048 [INFO] Capturing response: https://streamsport365.com/cinema 200 
+2026-06-23 01:35:42,165 [INFO] Capturing response: https://teletv5.top/load/yayinlink.php?id=s-sport 200 
+2026-06-23 01:35:42,284 [INFO] Capturing request: https://atomsportv508.top/assets/img/player_logo_6880e4e4c52ee.png
+2026-06-23 01:35:42,344 [INFO] Capturing request: https://hlssssssssssssssssss.yedeklinksa35.workers.dev/https://corestream.ronaldovurdu.help//s-sportt/tracks-v1a1/mono.m3u8
+2026-06-23 01:35:42,371 [INFO] Capturing response: https://atomsportv508.top/assets/img/player_logo_6880e4e4c52ee.png 200 
+2026-06-23 01:35:42,557 [INFO] Capturing response: https://hlssssssssssssssssss.yedeklinksa35.workers.dev/https://corestream.ronaldovurdu.help//s-sportt/tracks-v1a1/mono.m3u8 200 
+2026-06-23 01:35:42,765 [INFO] Capturing request: https://ts.yedeklinksa35.workers.dev/s-sportt/tracks-v1a1/2026/06/23/01/36/03-05000.avif
+2026-06-23 01:35:43,663 [INFO] Capturing response: https://ts.yedeklinksa35.workers.dev/s-sportt/tracks-v1a1/2026/06/23/01/36/03-05000.avif 200 
+2026-06-23 01:35:43,874 [INFO] Capturing request: https://ts.yedeklinksa35.workers.dev/s-sportt/tracks-v1a1/2026/06/23/01/36/08-07280.avif
+2026-06-23 01:35:44,524 [INFO]   ✅ M3U8 bulundu: https://hlssssssssssssssssss.yedeklinksa35.workers.dev/https://corestream.ronaldovurdu.help//s-sportt/tracks-v1a1/mono.m3u8
+2026-06-23 01:35:45,333 [INFO] Capturing response: https://ts.yedeklinksa35.workers.dev/s-sportt/tracks-v1a1/2026/06/23/01/36/08-07280.avif 200 
+2026-06-23 01:35:45,524 [INFO] 
+[9/14]
+2026-06-23 01:35:45,524 [INFO] 🔍 S Sport 2 → https://atomsportv508.top/matches?id=s-sport-2
+2026-06-23 01:35:45,550 [INFO] Capturing request: https://ts.yedeklinksa35.workers.dev/s-sportt/tracks-v1a1/2026/06/23/01/36/15-05840.avif
+2026-06-23 01:35:45,633 [INFO] Capturing request: https://atomsportv508.top/assets/js/clappr.js
+2026-06-23 01:35:45,637 [INFO] Capturing request: https://atomsportv508.top/matches?id=s-sport-2
+2026-06-23 01:35:45,669 [INFO] Capturing response: https://atomsportv508.top/assets/js/clappr.js 200 
+2026-06-23 01:35:45,711 [INFO] Capturing response: https://atomsportv508.top/matches?id=s-sport-2 200 
+2026-06-23 01:35:45,721 [INFO] Capturing request: https://atomsportv508.top/cdn-cgi/rum?
+2026-06-23 01:35:45,754 [INFO] Capturing request: https://streamsport365.com/cinema
+2026-06-23 01:35:45,757 [INFO] Capturing request: https://atomsportv508.top/cdn-cgi/rum?
+2026-06-23 01:35:45,855 [INFO] Capturing request: https://teletv5.top/load/yayinlink.php?id=s-sport-2
+2026-06-23 01:35:45,863 [INFO] Capturing request: https://atomsportv508.top/favicon.ico
+2026-06-23 01:35:45,865 [INFO] Capturing response: https://atomsportv508.top/cdn-cgi/rum? 204 
+2026-06-23 01:35:45,918 [INFO] Capturing response: https://atomsportv508.top/favicon.ico 200 
+2026-06-23 01:35:45,934 [INFO] Capturing response: https://atomsportv508.top/cdn-cgi/rum? 204 
+2026-06-23 01:35:46,028 [INFO] Capturing response: https://teletv5.top/load/yayinlink.php?id=s-sport-2 200 
+2026-06-23 01:35:46,073 [INFO] Capturing response: https://streamsport365.com/cinema 200 
+2026-06-23 01:35:46,191 [INFO] Capturing request: https://hlssssssssssssssssss.yedeklinksa35.workers.dev/https://corestream.ronaldovurdu.help//s-sport2/tracks-v1a1/mono.m3u8
+2026-06-23 01:35:46,381 [INFO] Capturing response: https://hlssssssssssssssssss.yedeklinksa35.workers.dev/https://corestream.ronaldovurdu.help//s-sport2/tracks-v1a1/mono.m3u8 200 
+2026-06-23 01:35:46,490 [INFO] Capturing request: https://ts.yedeklinksa35.workers.dev/s-sport2/tracks-v1a1/2026/06/23/01/35/29-06000.avif
+2026-06-23 01:35:47,276 [INFO] Capturing response: https://ts.yedeklinksa35.workers.dev/s-sportt/tracks-v1a1/2026/06/23/01/36/15-05840.avif 200 
+2026-06-23 01:35:47,313 [INFO] 127.0.0.1:50388: ProtocolException("Error in HTTP connection: Http2ZombieException('Connection or stream already dead: 1782178547.3132164, False')")
+2026-06-23 01:35:48,275 [INFO] Capturing response: https://ts.yedeklinksa35.workers.dev/s-sport2/tracks-v1a1/2026/06/23/01/35/29-06000.avif 200 
+2026-06-23 01:35:48,529 [INFO] Capturing request: https://ts.yedeklinksa35.workers.dev/s-sport2/tracks-v1a1/2026/06/23/01/35/35-06000.avif
+2026-06-23 01:35:48,776 [INFO] Capturing request: https://android.clients.google.com/c2dm/register3
+2026-06-23 01:35:48,781 [INFO]   ✅ M3U8 bulundu: https://hlssssssssssssssssss.yedeklinksa35.workers.dev/https://corestream.ronaldovurdu.help//s-sport2/tracks-v1a1/mono.m3u8
+2026-06-23 01:35:48,839 [INFO] Capturing response: https://android.clients.google.com/c2dm/register3 301 
+2026-06-23 01:35:49,781 [INFO] 
+[10/14]
+2026-06-23 01:35:49,782 [INFO] 🔍 A Spor → https://atomsportv508.top/matches?id=a-spor
+2026-06-23 01:35:49,895 [INFO] Capturing request: https://atomsportv508.top/assets/js/clappr.js
+2026-06-23 01:35:49,895 [INFO] Capturing request: https://atomsportv508.top/matches?id=a-spor
+2026-06-23 01:35:49,926 [INFO] Capturing response: https://atomsportv508.top/assets/js/clappr.js 200 
+2026-06-23 01:35:49,983 [INFO] Capturing response: https://atomsportv508.top/matches?id=a-spor 200 
+2026-06-23 01:35:49,996 [INFO] Capturing request: https://atomsportv508.top/cdn-cgi/rum?
+2026-06-23 01:35:50,031 [INFO] Capturing request: https://atomsportv508.top/cdn-cgi/rum?
+2026-06-23 01:35:50,128 [INFO] Capturing request: https://teletv5.top/load/yayinlink.php?id=a-spor
+2026-06-23 01:35:50,139 [INFO] Capturing response: https://atomsportv508.top/cdn-cgi/rum? 204 
+2026-06-23 01:35:50,140 [INFO] Capturing request: https://atomsportv508.top/favicon.ico
+2026-06-23 01:35:50,186 [INFO] Capturing response: https://atomsportv508.top/favicon.ico 200 
+2026-06-23 01:35:50,210 [INFO] Capturing response: https://atomsportv508.top/cdn-cgi/rum? 204 
+2026-06-23 01:35:50,258 [INFO] Capturing request: https://streamsport365.com/cinema
+2026-06-23 01:35:50,302 [INFO] Capturing response: https://teletv5.top/load/yayinlink.php?id=a-spor 200 
+2026-06-23 01:35:50,479 [INFO] Capturing response: https://ts.yedeklinksa35.workers.dev/s-sport2/tracks-v1a1/2026/06/23/01/35/35-06000.avif 200 
+2026-06-23 01:35:50,538 [INFO] 127.0.0.1:50388: ProtocolException("Error in HTTP connection: Http2ZombieException('Connection or stream already dead: 1782178550.538224, False')")
+2026-06-23 01:35:50,571 [INFO] Capturing response: https://streamsport365.com/cinema 200 
+2026-06-23 01:35:50,691 [INFO] Capturing request: https://hlssssssssssssssssss.yedeklinksa35.workers.dev/https://corestream.ronaldovurdu.help//aspor/tracks-v1a1/mono.m3u8
+2026-06-23 01:35:50,880 [INFO] Capturing response: https://hlssssssssssssssssss.yedeklinksa35.workers.dev/https://corestream.ronaldovurdu.help//aspor/tracks-v1a1/mono.m3u8 200 
+2026-06-23 01:35:50,989 [INFO] Capturing request: https://ts.yedeklinksa35.workers.dev/aspor/tracks-v1a1/2026/06/23/01/36/29-06000.avif
+2026-06-23 01:35:52,530 [INFO] Capturing response: https://ts.yedeklinksa35.workers.dev/aspor/tracks-v1a1/2026/06/23/01/36/29-06000.avif 200 
+2026-06-23 01:35:52,781 [INFO] Capturing request: https://ts.yedeklinksa35.workers.dev/aspor/tracks-v1a1/2026/06/23/01/36/35-06000.avif
+2026-06-23 01:35:53,045 [INFO]   ✅ M3U8 bulundu: https://hlssssssssssssssssss.yedeklinksa35.workers.dev/https://corestream.ronaldovurdu.help//aspor/tracks-v1a1/mono.m3u8
+2026-06-23 01:35:54,045 [INFO] 
+[11/14]
+2026-06-23 01:35:54,045 [INFO] 🔍 Tivibu Spor 1 → https://atomsportv508.top/matches?id=tivibu-spor-1
+2026-06-23 01:35:54,157 [INFO] Capturing request: https://atomsportv508.top/assets/js/clappr.js
+2026-06-23 01:35:54,157 [INFO] Capturing request: https://atomsportv508.top/matches?id=tivibu-spor-1
+2026-06-23 01:35:54,191 [INFO] Capturing response: https://atomsportv508.top/assets/js/clappr.js 200 
+2026-06-23 01:35:54,242 [INFO] Capturing response: https://atomsportv508.top/matches?id=tivibu-spor-1 200 
+2026-06-23 01:35:54,252 [INFO] Capturing request: https://atomsportv508.top/cdn-cgi/rum?
+2026-06-23 01:35:54,292 [INFO] Capturing request: https://streamsport365.com/cinema
+2026-06-23 01:35:54,301 [INFO] Capturing request: https://atomsportv508.top/cdn-cgi/rum?
+2026-06-23 01:35:54,389 [INFO] Capturing request: https://teletv5.top/load/yayinlink.php?id=tivibu-spor-1
+2026-06-23 01:35:54,403 [INFO] Capturing request: https://atomsportv508.top/favicon.ico
+2026-06-23 01:35:54,423 [INFO] Capturing response: https://atomsportv508.top/cdn-cgi/rum? 204 
+2026-06-23 01:35:54,428 [INFO] Capturing response: https://atomsportv508.top/cdn-cgi/rum? 204 
+2026-06-23 01:35:54,451 [INFO] Capturing response: https://atomsportv508.top/favicon.ico 200 
+2026-06-23 01:35:54,497 [INFO] Capturing response: https://ts.yedeklinksa35.workers.dev/aspor/tracks-v1a1/2026/06/23/01/36/35-06000.avif 200 
+2026-06-23 01:35:54,572 [INFO] Capturing response: https://teletv5.top/load/yayinlink.php?id=tivibu-spor-1 200 
+2026-06-23 01:35:54,609 [INFO] Capturing response: https://streamsport365.com/cinema 200 
+2026-06-23 01:36:27,580 [WARNING]   ❌ Tivibu Spor 1 için M3U8 bulunamadı
+2026-06-23 01:36:28,580 [INFO] 
+[12/14]
+2026-06-23 01:36:28,580 [INFO] 🔍 Tivibu Spor 2 → https://atomsportv508.top/matches?id=tivibu-spor-2
+2026-06-23 01:36:28,688 [INFO] Capturing request: https://atomsportv508.top/assets/js/clappr.js
+2026-06-23 01:36:28,690 [INFO] Capturing request: https://atomsportv508.top/matches?id=tivibu-spor-2
+2026-06-23 01:36:28,724 [INFO] Capturing response: https://atomsportv508.top/assets/js/clappr.js 200 
+2026-06-23 01:36:29,054 [INFO] Capturing response: https://atomsportv508.top/matches?id=tivibu-spor-2 200 
+2026-06-23 01:36:29,063 [INFO] Capturing request: https://atomsportv508.top/cdn-cgi/rum?
+2026-06-23 01:36:29,118 [INFO] Capturing request: https://atomsportv508.top/cdn-cgi/rum?
+2026-06-23 01:36:29,221 [INFO] Capturing response: https://atomsportv508.top/cdn-cgi/rum? 204 
+2026-06-23 01:36:29,222 [INFO] Capturing request: https://atomsportv508.top/favicon.ico
+2026-06-23 01:36:29,234 [INFO] Capturing request: https://teletv5.top/load/yayinlink.php?id=tivibu-spor-2
+2026-06-23 01:36:29,274 [INFO] Capturing response: https://atomsportv508.top/favicon.ico 200 
+2026-06-23 01:36:29,295 [INFO] Capturing response: https://atomsportv508.top/cdn-cgi/rum? 204 
+2026-06-23 01:36:29,346 [INFO] Capturing request: https://streamsport365.com/cinema
+2026-06-23 01:36:29,410 [INFO] Capturing response: https://teletv5.top/load/yayinlink.php?id=tivibu-spor-2 200 
+2026-06-23 01:36:29,666 [INFO] Capturing response: https://streamsport365.com/cinema 200 
+2026-06-23 01:37:02,393 [WARNING]   ❌ Tivibu Spor 2 için M3U8 bulunamadı
+2026-06-23 01:37:03,393 [INFO] 
+[13/14]
+2026-06-23 01:37:03,393 [INFO] 🔍 Tivibu Spor 3 → https://atomsportv508.top/matches?id=tivibu-spor-3
+2026-06-23 01:37:03,502 [INFO] Capturing request: https://atomsportv508.top/assets/js/clappr.js
+2026-06-23 01:37:03,503 [INFO] Capturing request: https://atomsportv508.top/matches?id=tivibu-spor-3
+2026-06-23 01:37:03,544 [INFO] Capturing response: https://atomsportv508.top/assets/js/clappr.js 200 
+2026-06-23 01:37:04,142 [INFO] Capturing response: https://atomsportv508.top/matches?id=tivibu-spor-3 200 
+2026-06-23 01:37:04,154 [INFO] Capturing request: https://atomsportv508.top/cdn-cgi/rum?
+2026-06-23 01:37:04,181 [INFO] Capturing request: https://atomsportv508.top/cdn-cgi/rum?
+2026-06-23 01:37:04,280 [INFO] Capturing request: https://teletv5.top/load/yayinlink.php?id=tivibu-spor-3
+2026-06-23 01:37:04,283 [INFO] Capturing request: https://atomsportv508.top/favicon.ico
+2026-06-23 01:37:04,288 [INFO] Capturing response: https://atomsportv508.top/cdn-cgi/rum? 204 
+2026-06-23 01:37:04,304 [INFO] Capturing response: https://atomsportv508.top/cdn-cgi/rum? 204 
+2026-06-23 01:37:04,342 [INFO] Capturing response: https://atomsportv508.top/favicon.ico 200 
+2026-06-23 01:37:04,411 [INFO] Capturing request: https://streamsport365.com/cinema
+2026-06-23 01:37:04,460 [INFO] Capturing response: https://teletv5.top/load/yayinlink.php?id=tivibu-spor-3 200 
+2026-06-23 01:37:04,721 [INFO] Capturing response: https://streamsport365.com/cinema 200 
+2026-06-23 01:37:37,460 [WARNING]   ❌ Tivibu Spor 3 için M3U8 bulunamadı
+2026-06-23 01:37:38,460 [INFO] 
+[14/14]
+2026-06-23 01:37:38,460 [INFO] 🔍 Tivibu Spor 4 → https://atomsportv508.top/matches?id=tivibu-spor-4
+2026-06-23 01:37:38,570 [INFO] Capturing request: https://atomsportv508.top/assets/js/clappr.js
+2026-06-23 01:37:38,571 [INFO] Capturing request: https://atomsportv508.top/matches?id=tivibu-spor-4
+2026-06-23 01:37:38,608 [INFO] Capturing response: https://atomsportv508.top/assets/js/clappr.js 200 
+2026-06-23 01:37:38,923 [INFO] Capturing response: https://atomsportv508.top/matches?id=tivibu-spor-4 200 
+2026-06-23 01:37:38,933 [INFO] Capturing request: https://atomsportv508.top/cdn-cgi/rum?
+2026-06-23 01:37:38,966 [INFO] Capturing request: https://atomsportv508.top/cdn-cgi/rum?
+2026-06-23 01:37:39,056 [INFO] Capturing request: https://teletv5.top/load/yayinlink.php?id=tivibu-spor-4
+2026-06-23 01:37:39,070 [INFO] Capturing request: https://atomsportv508.top/favicon.ico
+2026-06-23 01:37:39,089 [INFO] Capturing response: https://atomsportv508.top/cdn-cgi/rum? 204 
+2026-06-23 01:37:39,104 [INFO] Capturing response: https://atomsportv508.top/cdn-cgi/rum? 204 
+2026-06-23 01:37:39,145 [INFO] Capturing response: https://atomsportv508.top/favicon.ico 200 
+2026-06-23 01:37:39,190 [INFO] Capturing request: https://streamsport365.com/cinema
+2026-06-23 01:37:39,234 [INFO] Capturing response: https://teletv5.top/load/yayinlink.php?id=tivibu-spor-4 200 
+2026-06-23 01:37:39,512 [INFO] Capturing response: https://streamsport365.com/cinema 200 
+2026-06-23 01:38:12,253 [WARNING]   ❌ Tivibu Spor 4 için M3U8 bulunamadı
+2026-06-23 01:38:13,320 [INFO] ✅ 5 kanal bulundu, playlist.m3u kaydedildi
