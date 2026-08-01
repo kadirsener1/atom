@@ -1,6 +1,6 @@
 {
-  "last_update": "2026-08-01T17:35:27.757594",
-  "total_channels": 11,
+  "last_update": "2026-08-01T19:13:04.269833",
+  "total_channels": 10,
   "channels": [
     {
       "name": "beIN Sports 1",
@@ -34,7 +34,7 @@
     },
     {
       "name": "beIN Sports Max 2",
-      "url": "https://corestream.siteyaptim.live//trtspor/tracks-v1a1/mono.m3u8",
+      "url": "https://corestream.siteyaptim.live//hls/s-sport.m3u8",
       "group": "Spor"
     },
     {
@@ -49,11 +49,6 @@
     },
     {
       "name": "A Spor",
-      "url": "https://corestream.siteyaptim.live//aspor/tracks-v1a1/mono.m3u8",
-      "group": "Spor"
-    },
-    {
-      "name": "Tivibu Spor 1",
       "url": "https://corestream.siteyaptim.live//aspor/tracks-v1a1/mono.m3u8",
       "group": "Spor"
     }
