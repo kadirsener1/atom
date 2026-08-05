@@ -36,7 +36,7 @@ def get_base_domain():
         
     except Exception as e:
         print(f"Domain hatası: {e}")
-        return "https://www.atomsportv480.top"
+        return "https://www.atomsportv512.top"
 
 def get_channel_m3u8(channel_id, base_domain):
     """PHP mantığı ile m3u8 linkini al"""
@@ -95,6 +95,8 @@ def get_all_possible_channels():
         ("bein-sports-2", "BEIN SPORTS 2"),
         ("bein-sports-3", "BEIN SPORTS 3"),
         ("bein-sports-4", "BEIN SPORTS 4"),
+        ("bein-sports-max-1", "BEIN SPORTS MAX 1"),
+        ("bein-sports-max-2", "BEIN SPORTS MAX 2"),
         
         # S SPORT
         ("s-sport", "S SPORT"),
@@ -111,7 +113,7 @@ def get_all_possible_channels():
         ("trt1", "TRT 1"),
         
         # DİĞER
-        ("aspor", "ASPOR"),
+        ("a-spor", "A SPOR"),
     ]
     
     for channel_id, name in tv_channels:
