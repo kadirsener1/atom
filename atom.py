@@ -121,7 +121,7 @@ def get_all_possible_channels():
         channels.append({
             'id': channel_id,
             'name': name,
-            'group': 'TV Kanalları'
+            'group': 'Atom Spor'
         })
     
     print(f"Toplam {len(channels)} TV kanal ID'si oluşturuldu")
