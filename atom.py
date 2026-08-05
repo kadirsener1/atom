@@ -164,7 +164,7 @@ def create_m3u(working_channels, base_domain):
             m3u8_url = channel["url"]
             
             # EXTINF satırı
-            f.write(f'#EXTINF:-1 tvg-id="{channel_id}" tvg-name="{channel_name}" group-title="TV Kanalları",{channel_name}\n')
+            f.write(f'#EXTINF:-1 tvg-id="{channel_id}" tvg-name="{channel_name}" group-title="Atom Spor",{channel_name}\n')
             
             # VLC seçenekleri
             f.write(f'#EXTVLCOPT:http-referrer={base_domain}\n')
