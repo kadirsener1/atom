@@ -1,6 +1,6 @@
 {
-  "last_update": "2026-08-07T10:56:40.587507",
-  "total_channels": 10,
+  "last_update": "2026-08-07T11:49:30.349043",
+  "total_channels": 11,
   "channels": [
     {
       "name": "beIN Sports 1",
@@ -49,6 +49,11 @@
     },
     {
       "name": "A Spor",
+      "url": "https://corestream.siteyaptim.live//aspor/tracks-v1a1/mono.m3u8",
+      "group": "Spor"
+    },
+    {
+      "name": "Tivibu Spor 1",
       "url": "https://corestream.siteyaptim.live//aspor/tracks-v1a1/mono.m3u8",
       "group": "Spor"
     }
