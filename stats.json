@@ -1,6 +1,6 @@
 {
-  "last_update": "2026-08-18T19:54:52.012158",
-  "total_channels": 9,
+  "last_update": "2026-08-18T20:55:00.270768",
+  "total_channels": 10,
   "channels": [
     {
       "name": "beIN Sports 1",
@@ -8,8 +8,13 @@
       "group": "Spor"
     },
     {
+      "name": "beIN Sports 2",
+      "url": "https://corestream.siteyaptim.live/hls/trt1.m3u8",
+      "group": "Spor"
+    },
+    {
       "name": "beIN Sports 3",
-      "url": "https://corestream.siteyaptim.live//bein3/tracks-v1a1/mono.m3u8",
+      "url": "https://corestream.siteyaptim.live/hls/trt1.m3u8",
       "group": "Spor"
     },
     {
