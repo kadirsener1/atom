@@ -1,6 +1,6 @@
 {
-  "last_update": "2026-08-26T20:44:03.078921",
-  "total_channels": 8,
+  "last_update": "2026-08-27T00:34:10.737182",
+  "total_channels": 10,
   "channels": [
     {
       "name": "beIN Sports 1",
@@ -25,6 +25,16 @@
     {
       "name": "beIN Sports 5",
       "url": "https://corestream.ardastream.live//bein5/tracks-v1a1/mono.m3u8",
+      "group": "Spor"
+    },
+    {
+      "name": "beIN Sports Max 1",
+      "url": "https://corestream.ardastream.live//beinmax1/tracks-v1a1/mono.m3u8",
+      "group": "Spor"
+    },
+    {
+      "name": "beIN Sports Max 2",
+      "url": "https://corestream.ardastream.live//beinmax2/tracks-v1a1/mono.m3u8",
       "group": "Spor"
     },
     {
