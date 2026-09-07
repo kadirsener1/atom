@@ -5,7 +5,7 @@ permissions:
 
 on:
   schedule:
-    - cron: '0 * * * *'   # Her saat başı çalışır
+    - cron: '0 */3 * * *'   # Her saat başı çalışır
   workflow_dispatch:       # Manuel çalıştırma
 
 jobs:
